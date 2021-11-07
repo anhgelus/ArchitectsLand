@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 public class ArchitectsLand extends JavaPlugin {
 
-    private final Logger logger = Logger.getLogger("Minecraft");
+    public static final Logger LOGGER = Logger.getLogger("Minecraft");
 
     private PluginManager plManager;
 
@@ -21,7 +21,7 @@ public class ArchitectsLand extends JavaPlugin {
     }*/
 
     public void onEnable() {
-        logger.info("[" + PLUGIN_NAME +  "] The plugin has been activated"); //info
+        LOGGER.info("[" + PLUGIN_NAME +  "] The plugin has been activated"); //info
 
         plManager = Bukkit.getServer().getPluginManager();
 
@@ -33,7 +33,7 @@ public class ArchitectsLand extends JavaPlugin {
     }
 
     public void onDisable() {
-        logger.info("[" + PLUGIN_NAME + "] The plugin has been desactivated");
+        LOGGER.info("[" + PLUGIN_NAME + "] The plugin has been desactivated");
     }
 
 }
