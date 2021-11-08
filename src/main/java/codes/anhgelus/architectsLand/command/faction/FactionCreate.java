@@ -3,8 +3,10 @@ package main.java.codes.anhgelus.architectsLand.command.faction;
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
 import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
 import main.java.codes.anhgelus.architectsLand.util.Static;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
@@ -34,13 +36,23 @@ public class FactionCreate {
 
             final String key = strings[1].toLowerCase();
             final String status = ".status";
+            final String prefixBrut = key.substring(0, 3).toUpperCase();
+            String prefix = "[\"\",{\"text\":\"[\",\"color\":\"yellow\"},{\"text\":\"" + prefixBrut + "\",\"color\":\"white\"},{\"text\":\"] \",\"color\":\"yellow\"}]";
             config.set(key + ".owner", playerUUID);
             config.set(key + ".members", playerUUID + ",");
             config.set(key + status + ".description", "No description set. Use /f modify description to set it.");
-            config.set(key + status + ".prefix", Static.SEPARATOR_COLOR + "[" + ChatColor.WHITE + key.substring(0, 3).toUpperCase() + Static.SEPARATOR_COLOR + "]");
+            config.set(key + status + ".prefix", prefix);
             config.set(key + status + ".name", strings[1]);
+            config.set(key + status + ".color", "white");
 
             FactionCommand.saveFile(config, basesFile);
+
+            ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+            Bukkit.dispatchCommand(console, "team add " + key);
+            Bukkit.dispatchCommand(console, "team join " + key + " " + ((Player) commandSender).getDisplayName());
+            Bukkit.dispatchCommand(console, "team modify " + key + " prefix " + prefix);
+
+
             commandSender.sendMessage(Static.SUCCESS + "The faction was created!");
             ArchitectsLand.LOGGER.info("Faction " + strings[1] + " was created by " + ((Player) commandSender).getDisplayName());
         } else {
