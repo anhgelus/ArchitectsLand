@@ -42,7 +42,7 @@ public class FactionModify {
                 commandSender.sendMessage(Static.ERROR + "You can't modify this status!");
                 return true;
             } else if (Objects.equals(strings[2], "prefix")) {
-                modified = ChatColor.WHITE + "[" + modified + ChatColor.WHITE + "]";
+                modified = Static.prefixCreator(strings[3]);
             }
             final String link = key + status + strings[2];
             config.set(link, modified);

@@ -13,6 +13,8 @@ public class Static {
     public static final String SEPARATOR = SEPARATOR_COLOR + "===============";
     public static final String EOL = "\n";
 
+    public static final String[] COLOR_CODE = {"§0,black", "§1,dark_blue", "§2,dark_green", "§3,dark_aqua", "§4,dark_red", "§5,dark_purple", "§6,gold", "§7,gray", "§8,dark_gray", "§9,blue", "§a,green", "§b,aqua", "§c,red", "§d,light_purple", "§e,yellow", "§f,white"};
+
     /*
     * toJson method not finished
     public static String toJson(String str) {
@@ -36,6 +38,8 @@ public class Static {
     }
     */
 
-    public static final String[] COLOR_CODE = {"§0,black", "§1,dark_blue", "§2,dark_green", "§3,dark_aqua", "§4,dark_red", "§5,dark_purple", "§6,gold", "§7,gray", "§8,dark_gray", "§9,blue", "§a,green", "§b,aqua", "§c,red", "§d,light_purple", "§e,yellow", "§f,white"};
+    public static String prefixCreator(String prefix) {
+        return "[\"\",{\"text\":\"[\",\"color\":\"yellow\"},{\"text\":\"" + prefix + "\",\"color\":\"white\"},{\"text\":\"] \",\"color\":\"yellow\"}]";
+    }
 
 }
