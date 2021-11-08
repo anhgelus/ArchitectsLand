@@ -3,8 +3,10 @@ package main.java.codes.anhgelus.architectsLand.command.faction;
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
 import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
 import main.java.codes.anhgelus.architectsLand.util.Static;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
@@ -38,11 +40,21 @@ public class FactionModify {
                 commandSender.sendMessage(Static.ERROR + "You're not the owner!");
                 return true;
             }
-            if (!Objects.equals(strings[2], "prefix") && !Objects.equals(strings[2], "name")) {
+            if (!Objects.equals(strings[2], "prefix") && !Objects.equals(strings[2], "name") && !Objects.equals(strings[2], "color")) {
                 commandSender.sendMessage(Static.ERROR + "You can't modify this status!");
                 return true;
             } else if (Objects.equals(strings[2], "prefix")) {
-                modified = ChatColor.WHITE + "[" + modified + ChatColor.WHITE + "]";
+                modified = Static.prefixCreator(strings[3], config.getString(key + status + "color"));
+            } else if (Objects.equals(strings[2], "color")) {
+                if (Static.colorExist(strings[3])) {
+                    final String prefix = Static.prefixCreator(config.getString(key + status + "name").substring(0, 3).toUpperCase(), strings[3]);
+                    modified = strings[3];
+                    ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+                    Bukkit.dispatchCommand(console, "team modify " + key + " prefix " + prefix);
+                } else {
+                    commandSender.sendMessage(Static.ERROR + "This color doesn't exist!");
+                    return true;
+                }
             }
             final String link = key + status + strings[2];
             config.set(link, modified);

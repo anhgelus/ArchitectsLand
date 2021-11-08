@@ -3,7 +3,9 @@ package main.java.codes.anhgelus.architectsLand.command.faction;
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
 import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
 import main.java.codes.anhgelus.architectsLand.util.Static;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
@@ -38,6 +40,9 @@ public class FactionDelete {
 
             config.set(key, null);
             FactionCommand.saveFile(config, basesFile);
+
+            ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+            Bukkit.dispatchCommand(console, "team remove " + key);
 
             commandSender.sendMessage(Static.SUCCESS + "The faction was deleted!");
             ArchitectsLand.LOGGER.info("Faction " + strings[1] + " was deleted by " + ((Player) commandSender).getDisplayName());
