@@ -46,6 +46,9 @@ public class FactionCommand implements CommandExecutor {
                 } else if (strings[0].equals("delete") && commandSender.hasPermission(FactionDelete.PERMISSION)) {
                     final FactionDelete fDelete = new FactionDelete(strings, commandSender, main);
                     return fDelete.command();
+                } else if (strings[0].equals("modify") && commandSender.hasPermission(FactionModify.PERMISSION)) {
+                    final FactionModify fModify = new FactionModify(strings, commandSender, main);
+                    return fModify.command();
                 }
                 commandSender.sendMessage(Static.ERROR + "You don't have the permission to do this!");
                 return true;

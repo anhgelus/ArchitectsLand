@@ -9,7 +9,7 @@ public class Static {
     public static final ChatColor EXAMPLE = ChatColor.DARK_AQUA;
     public static final ChatColor SEPARATOR_COLOR = ChatColor.YELLOW;
 
-    public static final String SEPARATOR = SEPARATOR_COLOR + "============";
+    public static final String SEPARATOR = SEPARATOR_COLOR + "===============";
     public static final String EOL = "\n";
 
 }
