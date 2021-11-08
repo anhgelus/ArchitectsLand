@@ -3,6 +3,8 @@ package main.java.codes.anhgelus.architectsLand.util;
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
 import org.bukkit.ChatColor;
 
+import java.util.Objects;
+
 public class Static {
 
     public static final ChatColor ERROR = ChatColor.RED;
@@ -38,8 +40,17 @@ public class Static {
     }
     */
 
-    public static String prefixCreator(String prefix) {
-        return "[\"\",{\"text\":\"[\",\"color\":\"yellow\"},{\"text\":\"" + prefix + "\",\"color\":\"white\"},{\"text\":\"] \",\"color\":\"yellow\"}]";
+    public static String prefixCreator(String prefix, String color) {
+        return "[\"\",{\"text\":\"[\",\"color\":\"yellow\"},{\"text\":\"" + prefix + "\",\"color\":\"" + color + "\"},{\"text\":\"] \",\"color\":\"yellow\"}]";
     }
 
+    public static boolean colorExist(String color) {
+        for (String i : COLOR_CODE) {
+            String[] realColor = i.split(",");
+            if (Objects.equals(color, realColor[1])) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

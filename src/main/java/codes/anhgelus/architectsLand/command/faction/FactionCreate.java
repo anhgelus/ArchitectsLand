@@ -37,7 +37,7 @@ public class FactionCreate {
             final String key = strings[1].toLowerCase();
             final String status = ".status";
             final String prefixBrut = key.substring(0, 3).toUpperCase();
-            final String prefix = Static.prefixCreator(prefixBrut);
+            final String prefix = Static.prefixCreator(prefixBrut, "white");
             config.set(key + ".owner", playerUUID);
             config.set(key + ".members", playerUUID + ",");
             config.set(key + status + ".description", "No description set. Use /f modify description to set it.");
