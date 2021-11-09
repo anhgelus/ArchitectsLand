@@ -37,6 +37,7 @@ public class FactionCreate {
             final String key = strings[1].toLowerCase();
             final String status = ".status";
 
+            // Check if the faction exist
             if (FactionCommand.doubleFaction(config, key)) {
                 commandSender.sendMessage(Static.ERROR + "This faction already exist!");
                 return true;
@@ -46,6 +47,7 @@ public class FactionCreate {
             final String prefixTeam = Static.prefixCreatorJson(prefixBrut, "white");
             final String prefix = ChatColor.YELLOW + "[" + ChatColor.WHITE + "" + prefixBrut + ChatColor.YELLOW + "]";
 
+            // Set every args in factions.yml
             config.set(key + ".owner", playerUUID);
             config.set(key + ".members", playerUUID + ",");
             config.set(key + status + ".description", "No description set. Use /f modify description to set it.");
@@ -55,11 +57,11 @@ public class FactionCreate {
 
             FactionCommand.saveFile(config, basesFile);
 
+            // Set every args in Minecraft team in game
             ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
             Bukkit.dispatchCommand(console, "team add " + key);
             Bukkit.dispatchCommand(console, "team join " + key + " " + ((Player) commandSender).getDisplayName());
             Bukkit.dispatchCommand(console, "team modify " + key + " prefix " + prefixTeam);
-
 
             commandSender.sendMessage(Static.SUCCESS + "The faction was created!");
             ArchitectsLand.LOGGER.info("Faction " + strings[1] + " was created by " + ((Player) commandSender).getDisplayName());
