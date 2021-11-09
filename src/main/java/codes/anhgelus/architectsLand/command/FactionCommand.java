@@ -34,21 +34,24 @@ public class FactionCommand implements CommandExecutor {
         if (s.equals("f") && commandSender instanceof Player) {
             // Check if the command has args
             if (strings.length != 0) {
-                if (strings[0].equals("create") && commandSender.hasPermission(FactionCreate.PERMISSION)) {
+                if (strings[0].equals("create") && commandSender.hasPermission(FactionCreate.PERMISSION) && commandSender.isOp()) {
                     final FactionCreate fCreate = new FactionCreate(strings, commandSender, main);
                     return fCreate.command();
-                } else if (strings[0].equals("join") && commandSender.hasPermission(FactionJoin.PERMISSION)) {
+                } else if (strings[0].equals("join") && commandSender.hasPermission(FactionJoin.PERMISSION) && commandSender.isOp()) {
                     final FactionJoin fJoin = new FactionJoin(strings, commandSender, main);
                     return fJoin.command();
-                } else if (strings[0].equals("leave") && commandSender.hasPermission(FactionLeave.PERMISSION)) {
+                } else if (strings[0].equals("leave") && commandSender.hasPermission(FactionLeave.PERMISSION) && commandSender.isOp()) {
                     final FactionLeave fLeave = new FactionLeave(strings, commandSender, main);
                     return fLeave.command();
-                } else if (strings[0].equals("delete") && commandSender.hasPermission(FactionDelete.PERMISSION)) {
+                } else if (strings[0].equals("delete") && commandSender.hasPermission(FactionDelete.PERMISSION) && commandSender.isOp()) {
                     final FactionDelete fDelete = new FactionDelete(strings, commandSender, main);
                     return fDelete.command();
-                } else if (strings[0].equals("modify") && commandSender.hasPermission(FactionModify.PERMISSION)) {
+                } else if (strings[0].equals("modify") && commandSender.hasPermission(FactionModify.PERMISSION) && commandSender.isOp()) {
                     final FactionModify fModify = new FactionModify(strings, commandSender, main);
                     return fModify.command();
+                } else if (strings[0].equals("status") && commandSender.hasPermission(FactionStatus.PERMISSION) && commandSender.isOp()) {
+                    final FactionStatus fStatus = new FactionStatus(strings, commandSender, main);
+                    return fStatus.command();
                 }
                 commandSender.sendMessage(Static.ERROR + "You don't have the permission to do this!");
                 return true;
