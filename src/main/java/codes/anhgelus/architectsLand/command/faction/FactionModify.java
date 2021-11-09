@@ -44,13 +44,28 @@ public class FactionModify {
                 commandSender.sendMessage(Static.ERROR + "You can't modify this status!");
                 return true;
             } else if (Objects.equals(strings[2], "prefix")) {
-                modified = Static.prefixCreator(strings[3], config.getString(key + status + "color"));
+
+                final String color = config.getString(key + status + "color");
+                final String prefix = Static.prefixCreatorJson(strings[3],color);
+
+                modified = Static.prefixCreatorYml(strings[3],color);
+
+                ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+                Bukkit.dispatchCommand(console, "team modify " + key + " prefix " + prefix);
+
             } else if (Objects.equals(strings[2], "color")) {
                 if (Static.colorExist(strings[3])) {
-                    final String prefix = Static.prefixCreator(config.getString(key + status + "name").substring(0, 3).toUpperCase(), strings[3]);
+
+                    final String prefix = config.getString(key + status + "name");
+                    final String prefixTeam = Static.prefixCreatorJson(prefix.substring(0, 3).toUpperCase(), strings[3]);
+
                     modified = strings[3];
+
+                    config.set(key + status + "prefix", Static.prefixCreatorYml(prefix.replace("[", "").replace("]", ""),strings[3]));
+
                     ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
-                    Bukkit.dispatchCommand(console, "team modify " + key + " prefix " + prefix);
+                    Bukkit.dispatchCommand(console, "team modify " + key + " prefix " + prefixTeam);
+
                 } else {
                     commandSender.sendMessage(Static.ERROR + "This color doesn't exist!");
                     return true;

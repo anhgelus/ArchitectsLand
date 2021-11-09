@@ -36,8 +36,16 @@ public class FactionCreate {
 
             final String key = strings[1].toLowerCase();
             final String status = ".status";
+
+            if (config.getString(key + ".owner") != null) {
+                commandSender.sendMessage(Static.ERROR + "This faction already exist!");
+                return true;
+            }
+
             final String prefixBrut = key.substring(0, 3).toUpperCase();
-            final String prefix = Static.prefixCreator(prefixBrut, "white");
+            final String prefixTeam = Static.prefixCreatorJson(prefixBrut, "white");
+            final String prefix = ChatColor.YELLOW + "[" + ChatColor.WHITE + "" + prefixBrut + ChatColor.YELLOW + "]";
+
             config.set(key + ".owner", playerUUID);
             config.set(key + ".members", playerUUID + ",");
             config.set(key + status + ".description", "No description set. Use /f modify description to set it.");
@@ -50,7 +58,7 @@ public class FactionCreate {
             ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
             Bukkit.dispatchCommand(console, "team add " + key);
             Bukkit.dispatchCommand(console, "team join " + key + " " + ((Player) commandSender).getDisplayName());
-            Bukkit.dispatchCommand(console, "team modify " + key + " prefix " + prefix);
+            Bukkit.dispatchCommand(console, "team modify " + key + " prefix " + prefixTeam);
 
 
             commandSender.sendMessage(Static.SUCCESS + "The faction was created!");
