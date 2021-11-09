@@ -29,27 +29,28 @@ public class FactionJoin {
             final YamlConfiguration config = YamlConfiguration.loadConfiguration(basesFile);
 
             // Check if the faction exist
-            if (config.getString(strings[1]) != null) {
-                final String faction = strings[1].toLowerCase();
-                final String playersString = config.getString(faction + ".members");
-                final String[] players = playersString.split(FactionCommand.UUID_SEPARATOR);
-
-                // Check if the player is in the faction
-                for (String i : players) {
-                    if (Objects.equals(i, String.valueOf(((Player) commandSender).getUniqueId()))) {
-                        commandSender.sendMessage(Static.ERROR + "You're already in this faction.");
-                        return true;
-                    }
-                }
-
-                config.set(strings[1] + ".members", playersString + ((Player) commandSender).getUniqueId() + FactionCommand.UUID_SEPARATOR);
-
-                FactionCommand.saveFile(config, basesFile);
-                commandSender.sendMessage(Static.SUCCESS + "You joined " + strings[1] + "!");
-                ArchitectsLand.LOGGER.info(((Player) commandSender).getDisplayName() + " joined " + strings[1]);
-            } else {
-                commandSender.sendMessage(Static.ERROR + "This faction doesn't exist.");
+            if (!FactionCommand.doubleFaction(config, strings[1])) {
+                commandSender.sendMessage(Static.ERROR + "This faction doesn't exist!");
+                return true;
             }
+
+            final String faction = strings[1].toLowerCase();
+            final String playersString = config.getString(faction + ".members");
+            final String[] players = playersString.split(FactionCommand.UUID_SEPARATOR);
+
+            // Check if the player is in the faction
+            for (String i : players) {
+                if (Objects.equals(i, String.valueOf(((Player) commandSender).getUniqueId()))) {
+                    commandSender.sendMessage(Static.ERROR + "You're already in this faction.");
+                    return true;
+                }
+            }
+
+            config.set(strings[1] + ".members", playersString + ((Player) commandSender).getUniqueId() + FactionCommand.UUID_SEPARATOR);
+
+            FactionCommand.saveFile(config, basesFile);
+            commandSender.sendMessage(Static.SUCCESS + "You joined " + strings[1] + "!");
+            ArchitectsLand.LOGGER.info(((Player) commandSender).getDisplayName() + " joined " + strings[1]);
         } else {
             commandSender.sendMessage(Static.ERROR + "You need to specify the faction's name to join it!");
         }

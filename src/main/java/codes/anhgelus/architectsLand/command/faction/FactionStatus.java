@@ -32,6 +32,11 @@ public class FactionStatus {
             final String key = strings[1].toLowerCase();
             final String status = ".status.";
 
+            if (!FactionCommand.doubleFaction(config, key)) {
+                commandSender.sendMessage(Static.ERROR + "This faction doesn't exist!");
+                return true;
+            }
+
             final String fName = config.getString(key + status + "name");
             final String fPrefix = config.getString(key + status + "prefix");
             final String fColor = config.getString(key + status + "color");

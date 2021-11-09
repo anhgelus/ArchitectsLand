@@ -33,6 +33,11 @@ public class FactionDelete {
 
             final String key = strings[1].toLowerCase();
 
+            if (!FactionCommand.doubleFaction(config, key)) {
+                commandSender.sendMessage(Static.ERROR + "This faction doesn't exist!");
+                return true;
+            }
+
             if (!Objects.equals(playerUUID, config.getString(key + ".owner"))) {
                 commandSender.sendMessage(Static.ERROR + "You're not the owner!");
                 return true;

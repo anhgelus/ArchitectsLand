@@ -37,7 +37,7 @@ public class FactionCreate {
             final String key = strings[1].toLowerCase();
             final String status = ".status";
 
-            if (config.getString(key + ".owner") != null) {
+            if (FactionCommand.doubleFaction(config, key)) {
                 commandSender.sendMessage(Static.ERROR + "This faction already exist!");
                 return true;
             }

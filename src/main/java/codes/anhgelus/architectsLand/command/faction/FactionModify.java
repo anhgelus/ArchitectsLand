@@ -34,6 +34,12 @@ public class FactionModify {
 
             final String key = strings[1].toLowerCase();
             final String status = ".status.";
+
+            if (!FactionCommand.doubleFaction(config, key)) {
+                commandSender.sendMessage(Static.ERROR + "This faction doesn't exist!");
+                return true;
+            }
+
             String modified = strings[3];
 
             if (!Objects.equals(playerUUID, config.getString(key + ".owner"))) {
