@@ -15,11 +15,13 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class FactionCommand implements CommandExecutor {
 
     public static final String PERMISSION_FACTION = ArchitectsLand.PERMISSION + "faction.";
     public static final String UUID_SEPARATOR = ",";
+    public static final String FACTION_CHECKER_TARGET = ".name";
 
     private final ArchitectsLand main;
 
@@ -73,6 +75,10 @@ public class FactionCommand implements CommandExecutor {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static boolean doubleFaction(YamlConfiguration config, String faction) {
+        return config.getString(faction.toLowerCase() + FACTION_CHECKER_TARGET) == null;
     }
 
 }

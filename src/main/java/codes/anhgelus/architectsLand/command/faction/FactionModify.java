@@ -34,15 +34,25 @@ public class FactionModify {
 
             final String key = strings[1].toLowerCase();
             final String status = ".status.";
+
+            // Check if the faction exist
+            if (!FactionCommand.doubleFaction(config, key)) {
+                commandSender.sendMessage(Static.ERROR + "This faction doesn't exist!");
+                return true;
+            }
+
             String modified = strings[3];
 
+            // Check if the player is the owner
             if (!Objects.equals(playerUUID, config.getString(key + ".owner"))) {
                 commandSender.sendMessage(Static.ERROR + "You're not the owner!");
                 return true;
             }
+            // Check if it's the right args
             if (!Objects.equals(strings[2], "prefix") && !Objects.equals(strings[2], "name") && !Objects.equals(strings[2], "color")) {
-                commandSender.sendMessage(Static.ERROR + "You can't modify this status!");
+                commandSender.sendMessage(Static.ERROR + "This status doesn't exist!");
                 return true;
+            // Right args
             } else if (Objects.equals(strings[2], "prefix")) {
 
                 final String color = config.getString(key + status + "color");
@@ -53,7 +63,9 @@ public class FactionModify {
                 ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
                 Bukkit.dispatchCommand(console, "team modify " + key + " prefix " + prefix);
 
+            // Right args
             } else if (Objects.equals(strings[2], "color")) {
+                // Check if the color exist
                 if (Static.colorExist(strings[3])) {
 
                     final String prefix = config.getString(key + status + "name");

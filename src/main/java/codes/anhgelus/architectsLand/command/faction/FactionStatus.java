@@ -32,12 +32,17 @@ public class FactionStatus {
             final String key = strings[1].toLowerCase();
             final String status = ".status.";
 
+            // Check if the faction exist
+            if (!FactionCommand.doubleFaction(config, key)) {
+                commandSender.sendMessage(Static.ERROR + "This faction doesn't exist!");
+                return true;
+            }
+
+            // Get every args in the factions.yml
             final String fName = config.getString(key + status + "name");
             final String fPrefix = config.getString(key + status + "prefix");
             final String fColor = config.getString(key + status + "color");
             final String fDesc = config.getString(key + status + "description");
-
-            ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
 
             commandSender.sendMessage(Static.SEPARATOR + Static.EOL +
                     Static.IMPORTANT + strings[1].substring(0, 1).toUpperCase() + strings[1].substring(1) + " status:" + Static.EOL +
