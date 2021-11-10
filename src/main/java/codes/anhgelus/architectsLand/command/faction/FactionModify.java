@@ -27,6 +27,12 @@ public class FactionModify {
         this.commandSender = commandSender;
         this.main = main;
     }
+
+    /**
+     * Execute the command
+     *
+     * @return true
+     */
     public boolean command() {
         if (strings.length == 4 || (strings.length >= 4 && Objects.equals(strings[2], "description"))) {
             File basesFile = new FactionCommand(main).getFactionsData();

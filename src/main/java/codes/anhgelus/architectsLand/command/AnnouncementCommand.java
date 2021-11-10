@@ -11,6 +11,15 @@ import org.bukkit.entity.Player;
 public class AnnouncementCommand implements CommandExecutor {
     public static final String PERMISSION = ArchitectsLand.PERMISSION + "chat.announcement";
 
+    /**
+     * Create the /broadcast
+     *
+     * @param commandSender Sender of the command
+     * @param command Command
+     * @param s Command string
+     * @param strings Args
+     * @return true
+     */
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         // Check if the commandSend is a player or not

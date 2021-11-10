@@ -6,10 +6,18 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class FactionCompleter implements TabCompleter {
+    /**
+     * Complete the tab of /f commands
+     *
+     * @param commandSender Sender of the command
+     * @param command Command
+     * @param s Command in string
+     * @param strings Args
+     * @return List<String> of auto-completion | null
+     */
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
         /* Check the command name. */

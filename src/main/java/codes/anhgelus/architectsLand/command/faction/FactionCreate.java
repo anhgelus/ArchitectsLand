@@ -11,9 +11,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.Locale;
-import java.util.UUID;
 
 public class FactionCreate {
     private final String[] strings;
@@ -27,6 +24,12 @@ public class FactionCreate {
         this.commandSender = commandSender;
         this.main = main;
     }
+
+    /**
+     * Execute the command
+     *
+     * @return true
+     */
     public boolean command() {
         if (strings.length > 1) {
             File basesFile = new FactionCommand(main).getFactionsData();

@@ -24,6 +24,12 @@ public class FactionDelete {
         this.commandSender = commandSender;
         this.main = main;
     }
+
+    /**
+     * Execute the command
+     *
+     * @return true
+     */
     public boolean command() {
         if (strings.length > 1) {
             File basesFile = new FactionCommand(main).getFactionsData();

@@ -23,6 +23,12 @@ public class FactionJoin {
         this.commandSender = commandSender;
         this.main = main;
     }
+
+    /**
+     * Execute the command
+     *
+     * @return true
+     */
     public boolean command() {
         if (strings.length > 1) {
             final File basesFile = new FactionCommand(main).getFactionsData();

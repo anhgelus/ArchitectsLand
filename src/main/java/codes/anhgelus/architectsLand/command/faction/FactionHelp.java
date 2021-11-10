@@ -1,8 +1,6 @@
 package main.java.codes.anhgelus.architectsLand.command.faction;
 
-import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
 import main.java.codes.anhgelus.architectsLand.util.Static;
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 public class FactionHelp {
@@ -12,6 +10,12 @@ public class FactionHelp {
     public FactionHelp (CommandSender commandSender) {
         this.commandSender = commandSender;
     }
+
+    /**
+     * Execute the command
+     *
+     * @return true
+     */
     public boolean command() {
         commandSender.sendMessage(Static.SUCCESS + "Help faction command:\n\n" +
                 Static.SEPARATOR + Static.EOL +

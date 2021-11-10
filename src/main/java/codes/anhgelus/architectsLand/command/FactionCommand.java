@@ -3,19 +3,14 @@ package main.java.codes.anhgelus.architectsLand.command;
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
 import main.java.codes.anhgelus.architectsLand.command.faction.*;
 import main.java.codes.anhgelus.architectsLand.util.Static;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Locale;
 
 public class FactionCommand implements CommandExecutor {
 
@@ -74,10 +69,21 @@ public class FactionCommand implements CommandExecutor {
         return false;
     }
 
+    /**
+     * Get the factions data (factions.yml)
+     *
+     * @return Factions data file
+     */
     public File getFactionsData() {
         return new File(this.main.getDataFolder(), "data/factions.yml");
     }
 
+    /**
+     * Save YML File
+     *
+     * @param config Config to save (YamlConfiguration)
+     * @param basesFile File to save (File)
+     */
     public static void saveFile(YamlConfiguration config, File basesFile) {
         try {
             config.save(basesFile);
@@ -86,6 +92,13 @@ public class FactionCommand implements CommandExecutor {
         }
     }
 
+    /**
+     * Detect if the faction exist or not
+     *
+     * @param config Config file (YamlConfiguration)
+     * @param faction Detect this faction
+     * @return true -> faction exist | false -> faction doesn't exist
+     */
     public static boolean doubleFaction(YamlConfiguration config, String faction) {
         boolean toReturn = false;
         if (config.getString(faction.toLowerCase() + FACTION_CHECKER_TARGET) != null) {

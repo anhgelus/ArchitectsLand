@@ -8,8 +8,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
-import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 
 public class FactionLeave {
@@ -25,6 +23,11 @@ public class FactionLeave {
         this.main = main;
     }
 
+    /**
+     * Execute the command
+     *
+     * @return true
+     */
     public boolean command() {
         /*
         * BUG = N'arrive pas à récupérer les joueurs (null)
