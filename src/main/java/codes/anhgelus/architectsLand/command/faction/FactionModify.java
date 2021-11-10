@@ -4,7 +4,6 @@ import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
 import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
 import main.java.codes.anhgelus.architectsLand.util.Static;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -63,7 +62,7 @@ public class FactionModify {
             switch (strings[2]) {
                 case "prefix":
 
-                    final String color = config.getString(key + status + "color");
+                    final String color = config.getString(key + status + "prefix-color");
                     final String prefixJson = Static.prefixCreatorJson(strings[3], color);
 
                     modified = Static.prefixCreatorYml(strings[3], color);
@@ -71,7 +70,7 @@ public class FactionModify {
                     Bukkit.dispatchCommand(console, "team modify " + key + " prefix " + prefixJson);
 
                     break;
-                case "color":
+                case "prefix-color":
                     // Check if the color exist
                     if (Static.colorExist(strings[3])) {
 
@@ -80,7 +79,7 @@ public class FactionModify {
 
                         modified = strings[3];
 
-                        config.set(key + status + "prefix", Static.prefixCreatorYml(prefix.replace("[", "").replace("]", ""), strings[3]));
+                        config.set(key + status + "prefix", Static.prefixCreatorYml(prefix.replace("[", "").replace("]", ""), prefixTeam));
 
                         Bukkit.dispatchCommand(console, "team modify " + key + " prefix " + prefixTeam);
 

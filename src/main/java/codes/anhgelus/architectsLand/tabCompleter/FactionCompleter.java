@@ -14,22 +14,23 @@ public class FactionCompleter implements TabCompleter {
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
         /* Check the command name. */
         if(command.getName().equalsIgnoreCase("f")) {
+            final String faction_indication = "faction";
             if(strings.length == 1) {
                 return Arrays.asList("create", "delete", "join", "leave", "status", "modify");
             /* all /f */
             } else if (Objects.equals(strings[0], "create") && strings.length == 2) {
-                return Arrays.asList("faction_name");
+                return Arrays.asList(faction_indication);
             } else if (Objects.equals(strings[0], "delete") && strings.length == 2) {
-                return Arrays.asList("faction_name");
+                return Arrays.asList(faction_indication);
             } else if (Objects.equals(strings[0], "join") && strings.length == 2) {
-                return Arrays.asList("faction_name");
+                return Arrays.asList(faction_indication);
             } else if (Objects.equals(strings[0], "leave") && strings.length == 2) {
-                return Arrays.asList("faction_name");
+                return Arrays.asList(faction_indication);
             } else if (Objects.equals(strings[0], "status") && strings.length == 2) {
-                return Arrays.asList("faction_name");
+                return Arrays.asList(faction_indication);
             /* /f modify */
             } else if (Objects.equals(strings[0], "modify") && strings.length == 2) {
-                return Arrays.asList("faction");
+                return Arrays.asList(faction_indication);
             } else if(Objects.equals(strings[0], "modify") && strings.length == 3) {
                 return FactionModify.MODIFY_TYPE;
             } else if (Objects.equals(strings[2], "color") && strings.length == 4) {
