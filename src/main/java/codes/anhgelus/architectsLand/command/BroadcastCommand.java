@@ -40,10 +40,7 @@ public class BroadcastCommand implements CommandExecutor {
                 final Player[] players = Bukkit.getServer().getOnlinePlayers().toArray(new Player[0]);
 
                 for (Player i : players) {
-                    String message = new String();
-                    for (String n : strings) {
-                        message = message + " " + n;
-                    }
+                    final String message = Static.arrayToString(strings);
                     i.sendMessage(Static.SEPARATOR_COLOR + "[" + ChatColor.GREEN + "BROADCAST" + Static.SEPARATOR_COLOR + "]" +
                             Static.SUCCESS + message +
                             Static.EXAMPLE + " - par " + Static.ERROR + player.getDisplayName() );
