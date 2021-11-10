@@ -1,13 +1,18 @@
 main: main.java.codes.anhgelus.architectsLand.ArchitectsLand
 name: ArchitectsLand
-version: 0.2.5-dev.3
+version: 0.3.0-dev.2
 author: Anhgelus
 commands:
   f:
     description: Faction base command
     usage: Command error
   broadcast:
-    description: Broadcast to every player
+    description: Broadcast to every players
     usage: Command error
     aliases:
       - bc
+  announcement:
+    description: Send an announce to every players
+    usage: Command error
+    aliases:
+      - ann

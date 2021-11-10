@@ -1,5 +1,6 @@
 package main.java.codes.anhgelus.architectsLand;
 
+import main.java.codes.anhgelus.architectsLand.command.AnnouncementCommand;
 import main.java.codes.anhgelus.architectsLand.command.BroadcastCommand;
 import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
 import main.java.codes.anhgelus.architectsLand.tabCompleter.FactionCompleter;
@@ -32,6 +33,7 @@ public class ArchitectsLand extends JavaPlugin {
         //command
         getCommand("f").setExecutor(new FactionCommand(this));
         getCommand("broadcast").setExecutor(new BroadcastCommand());
+        getCommand("announcement").setExecutor(new AnnouncementCommand());
 
         //tabCompleter
         getCommand("f").setTabCompleter(new FactionCompleter());
