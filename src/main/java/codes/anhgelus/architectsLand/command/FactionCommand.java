@@ -21,7 +21,7 @@ public class FactionCommand implements CommandExecutor {
 
     public static final String PERMISSION_FACTION = ArchitectsLand.PERMISSION + "faction.";
     public static final String UUID_SEPARATOR = ",";
-    public static final String FACTION_CHECKER_TARGET = ".name";
+    public static final String FACTION_CHECKER_TARGET = ".status.name";
 
     private final ArchitectsLand main;
 
@@ -87,7 +87,11 @@ public class FactionCommand implements CommandExecutor {
     }
 
     public static boolean doubleFaction(YamlConfiguration config, String faction) {
-        return config.getString(faction.toLowerCase() + FACTION_CHECKER_TARGET) == null;
+        boolean toReturn = false;
+        if (config.getString(faction.toLowerCase() + FACTION_CHECKER_TARGET) != null) {
+            toReturn = true;
+        }
+        return toReturn;
     }
 
 }
