@@ -1,6 +1,6 @@
 main: main.java.codes.anhgelus.architectsLand.ArchitectsLand
 name: ArchitectsLand
-version: 0.2.2-dev.4
+version: 0.2.3-dev.2
 author: Anhgelus
 commands:
   f:
