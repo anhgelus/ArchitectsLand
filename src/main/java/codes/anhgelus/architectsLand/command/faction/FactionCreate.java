@@ -54,6 +54,7 @@ public class FactionCreate {
             config.set(key + status + ".prefix", prefix);
             config.set(key + status + ".name", strings[1]);
             config.set(key + status + ".color", "white");
+            config.set(key + status + ".prefix-color", "white");
 
             FactionCommand.saveFile(config, basesFile);
 

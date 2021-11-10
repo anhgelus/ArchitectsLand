@@ -4,13 +4,14 @@ import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
 import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
 import main.java.codes.anhgelus.architectsLand.util.Static;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class FactionModify {
@@ -19,6 +20,7 @@ public class FactionModify {
     private final ArchitectsLand main;
 
     public static final String PERMISSION = FactionCommand.PERMISSION_FACTION + "modify";
+    public static final List<String> MODIFY_TYPE = Arrays.asList("prefix", "name", "color", "description", "prefix-color");
 
     public FactionModify (String[] strings, CommandSender commandSender, ArchitectsLand main) {
         this.strings = strings;
@@ -48,43 +50,56 @@ public class FactionModify {
                 commandSender.sendMessage(Static.ERROR + "You're not the owner!");
                 return true;
             }
+
             // Check if it's the right args
-            if (!Objects.equals(strings[2], "prefix") && !Objects.equals(strings[2], "name") && !Objects.equals(strings[2], "color") && !Objects.equals(strings[2], "description")) {
+            if (MODIFY_TYPE.contains(strings[3])) {
                 commandSender.sendMessage(Static.ERROR + "This status doesn't exist!");
                 return true;
-            // Right args
-            } else if (Objects.equals(strings[2], "prefix")) {
+            }
 
-                final String color = config.getString(key + status + "color");
-                final String prefix = Static.prefixCreatorJson(strings[3],color);
+            ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
 
-                modified = Static.prefixCreatorYml(strings[3],color);
+            switch (strings[2]) {
+                case "prefix":
 
-                ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
-                Bukkit.dispatchCommand(console, "team modify " + key + " prefix " + prefix);
+                    final String color = config.getString(key + status + "prefix-color");
+                    final String prefixJson = Static.prefixCreatorJson(strings[3], color);
 
-            // Right args
-            } else if (Objects.equals(strings[2], "color")) {
-                // Check if the color exist
-                if (Static.colorExist(strings[3])) {
+                    modified = Static.prefixCreatorYml(strings[3], color);
 
-                    final String prefix = config.getString(key + status + "name");
-                    final String prefixTeam = Static.prefixCreatorJson(prefix.substring(0, 3).toUpperCase(), strings[3]);
+                    Bukkit.dispatchCommand(console, "team modify " + key + " prefix " + prefixJson);
 
-                    modified = strings[3];
+                    break;
+                case "prefix-color":
+                    // Check if the color exist
+                    if (Static.colorExist(strings[3])) {
 
-                    config.set(key + status + "prefix", Static.prefixCreatorYml(prefix.replace("[", "").replace("]", ""),strings[3]));
+                        final String prefix = config.getString(key + status + "name");
+                        final String prefixTeam = Static.prefixCreatorJson(prefix.substring(0, 3).toUpperCase(), strings[3]);
 
-                    ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
-                    Bukkit.dispatchCommand(console, "team modify " + key + " prefix " + prefixTeam);
+                        modified = strings[3];
 
-                } else {
-                    commandSender.sendMessage(Static.ERROR + "This color doesn't exist!");
-                    return true;
-                }
-            // Right args
-            } else if (Objects.equals(strings[2], "description")) {
-                modified = Static.arrayToString(strings).replace(strings[0], "").replace(strings[1], "").replace(strings[2], "").replace("    ", "");
+                        config.set(key + status + "prefix", Static.prefixCreatorYml(prefix.replace("[", "").replace("]", ""), prefixTeam));
+
+                        Bukkit.dispatchCommand(console, "team modify " + key + " prefix " + prefixTeam);
+
+                    } else {
+                        commandSender.sendMessage(Static.ERROR + "This color doesn't exist!");
+                        return true;
+                    }
+                    break;
+                case "description":
+                    modified = Static.arrayToString(strings).replace(strings[0], "").replace(strings[1], "").replace(strings[2], "").replace("    ", "");
+                    break;
+                case "color":
+                    if (Static.colorExist(strings[3])) {
+                        modified = Static.getChatColor(strings[3]) + strings[3];
+                        Bukkit.dispatchCommand(console, "team modify " + key + " color " + strings[3]);
+                    } else {
+                        commandSender.sendMessage(Static.ERROR + "This color doesn't exist!");
+                        return true;
+                    }
+                    break;
             }
 
             final String link = key + status + strings[2];
