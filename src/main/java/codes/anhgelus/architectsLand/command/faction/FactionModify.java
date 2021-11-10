@@ -80,12 +80,12 @@ public class FactionModify {
                     // Check if the color exist
                     if (Static.colorExist(strings[3])) {
 
-                        final String prefix = config.getString(key + status + "name");
-                        final String prefixTeam = Static.prefixCreatorJson(prefix.substring(0, 3).toUpperCase(), strings[3]);
+                        final String prefix = config.getString(key + status + "prefix").replace("[", "").replace("]", "");
+                        final String prefixTeam = Static.prefixCreatorJson(prefix, strings[3]);
 
                         modified = strings[3];
 
-                        config.set(key + status + "prefix", Static.prefixCreatorYml(prefix.replace("[", "").replace("]", ""), prefixTeam));
+                        config.set(key + status + "prefix", Static.prefixCreatorYml(prefix, prefixTeam));
 
                         Bukkit.dispatchCommand(console, "team modify " + key + " prefix " + prefixTeam);
 
