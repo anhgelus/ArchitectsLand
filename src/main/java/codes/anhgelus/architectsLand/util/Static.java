@@ -78,4 +78,18 @@ public class Static {
     public static String prefixCreatorYml(String prefix, String color) {
         return ChatColor.YELLOW + "[" + getChatColor(color) + prefix + ChatColor.YELLOW + "]";
     }
+
+    /**
+     * Convert array to string
+     *
+     * @param array A string array
+     * @return Converted string array
+     */
+    public static String arrayToString(String[] array) {
+        String str = new String();
+        for (String n : array) {
+            str = str + " " + n;
+        }
+        return str;
+    }
 }

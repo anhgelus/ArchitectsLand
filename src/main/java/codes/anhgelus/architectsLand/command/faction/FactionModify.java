@@ -26,7 +26,7 @@ public class FactionModify {
         this.main = main;
     }
     public boolean command() {
-        if (strings.length == 4) {
+        if (strings.length == 4 || (strings.length >= 4 && Objects.equals(strings[2], "description"))) {
             File basesFile = new FactionCommand(main).getFactionsData();
             final YamlConfiguration config = YamlConfiguration.loadConfiguration(basesFile);
 
@@ -49,7 +49,7 @@ public class FactionModify {
                 return true;
             }
             // Check if it's the right args
-            if (!Objects.equals(strings[2], "prefix") && !Objects.equals(strings[2], "name") && !Objects.equals(strings[2], "color")) {
+            if (!Objects.equals(strings[2], "prefix") && !Objects.equals(strings[2], "name") && !Objects.equals(strings[2], "color") && !Objects.equals(strings[2], "description")) {
                 commandSender.sendMessage(Static.ERROR + "This status doesn't exist!");
                 return true;
             // Right args
@@ -82,7 +82,11 @@ public class FactionModify {
                     commandSender.sendMessage(Static.ERROR + "This color doesn't exist!");
                     return true;
                 }
+            // Right args
+            } else if (Objects.equals(strings[2], "description")) {
+                modified = Static.arrayToString(strings).replace(strings[0], "").replace(strings[1], "").replace(strings[2], "").replace("    ", "");
             }
+
             final String link = key + status + strings[2];
             config.set(link, modified);
 
