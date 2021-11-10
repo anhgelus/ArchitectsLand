@@ -27,6 +27,15 @@ public class FactionCommand implements CommandExecutor {
         this.main = main;
     }
 
+    /**
+     * Create the /f
+     *
+     * @param commandSender Sender of the command
+     * @param command Command
+     * @param s Command string
+     * @param strings Args
+     * @return true
+     */
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
 
