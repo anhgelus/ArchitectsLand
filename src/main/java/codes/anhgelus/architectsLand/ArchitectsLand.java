@@ -1,5 +1,6 @@
 package main.java.codes.anhgelus.architectsLand;
 
+import main.java.codes.anhgelus.architectsLand.command.BroadcastCommand;
 import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -29,6 +30,7 @@ public class ArchitectsLand extends JavaPlugin {
 
         //command
         getCommand("f").setExecutor(new FactionCommand(this));
+        getCommand("broadcast").setExecutor(new BroadcastCommand());
 
     }
 
