@@ -91,6 +91,15 @@ public class FactionModify {
                 case "description":
                     modified = Static.arrayToString(strings).replace(strings[0], "").replace(strings[1], "").replace(strings[2], "").replace("    ", "");
                     break;
+                case "color":
+                    if (Static.colorExist(strings[3])) {
+                        modified = Static.getChatColor(strings[3]) + strings[3];
+                        Bukkit.dispatchCommand(console, "team modify " + key + " color " + strings[3]);
+                    } else {
+                        commandSender.sendMessage(Static.ERROR + "This color doesn't exist!");
+                        return true;
+                    }
+                    break;
             }
 
             final String link = key + status + strings[2];
