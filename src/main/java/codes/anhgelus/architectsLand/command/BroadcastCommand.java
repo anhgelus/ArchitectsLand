@@ -42,7 +42,7 @@ public class BroadcastCommand implements CommandExecutor {
                     final String message = Static.arrayToString(strings);
                     i.sendMessage(Static.SEPARATOR_COLOR + "[" + ChatColor.GREEN + "BROADCAST" + Static.SEPARATOR_COLOR + "]" +
                             Static.SUCCESS + message +
-                            Static.EXAMPLE + " - par " + Static.ERROR + player.getDisplayName() );
+                            Static.EXAMPLE + " - par " + player.getDisplayName() );
                 }
                 return true;
             }
