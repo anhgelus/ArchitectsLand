@@ -3,6 +3,8 @@ package main.java.codes.anhgelus.architectsLand;
 import main.java.codes.anhgelus.architectsLand.command.AnnouncementCommand;
 import main.java.codes.anhgelus.architectsLand.command.BroadcastCommand;
 import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
+import main.java.codes.anhgelus.architectsLand.tabCompleter.AnnouncementCompleter;
+import main.java.codes.anhgelus.architectsLand.tabCompleter.BroadcastCompleter;
 import main.java.codes.anhgelus.architectsLand.tabCompleter.FactionCompleter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -37,6 +39,8 @@ public class ArchitectsLand extends JavaPlugin {
 
         //tabCompleter
         getCommand("f").setTabCompleter(new FactionCompleter());
+        getCommand("broadcast").setTabCompleter(new BroadcastCompleter());
+        getCommand("announcement").setTabCompleter(new AnnouncementCompleter());
 
     }
 
