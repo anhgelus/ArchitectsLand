@@ -1,8 +1,10 @@
 package main.java.codes.anhgelus.architectsLand.util;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 
-import java.util.Objects;
+import java.util.*;
 
 public class Static {
 
@@ -91,5 +93,19 @@ public class Static {
             str = str + " " + n;
         }
         return str;
+    }
+
+    /**
+     * Get every player connected
+     *
+     * @return List of players' name
+     */
+    public static List<String> getEveryPlayer() {
+        final Collection<? extends Player> players = Bukkit.getOnlinePlayers();
+        List<String> tabCompletion = new ArrayList<String>();
+        for (Player i : players) {
+            tabCompletion.add(i.getDisplayName());
+        }
+        return tabCompletion;
     }
 }

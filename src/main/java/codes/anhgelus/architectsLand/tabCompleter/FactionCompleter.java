@@ -24,7 +24,7 @@ public class FactionCompleter implements TabCompleter {
         if(command.getName().equalsIgnoreCase("f")) {
             final String faction_indication = "faction";
             if(strings.length == 1) {
-                return Arrays.asList("create", "delete", "join", "leave", "status", "modify");
+                return Arrays.asList("create", "delete", "join", "leave", "status", "modify", "invite");
             /* all /f */
             } else if (Objects.equals(strings[0], "create") && strings.length == 2) {
                 return Arrays.asList(faction_indication);
@@ -36,9 +36,13 @@ public class FactionCompleter implements TabCompleter {
                 return Arrays.asList(faction_indication);
             } else if (Objects.equals(strings[0], "status") && strings.length == 2) {
                 return Arrays.asList(faction_indication);
+            } else if (Objects.equals(strings[0], "invite") && strings.length == 2) {
+                return Static.getEveryPlayer();
             /* /f modify */
             } else if (Objects.equals(strings[0], "modify") && strings.length == 2) {
                 return Arrays.asList(faction_indication);
+            } else if (strings.length == 2) {
+                return Static.getEveryPlayer();
             } else if(Objects.equals(strings[0], "modify") && strings.length == 3) {
                 return FactionModify.MODIFY_TYPE;
             } else if (Objects.equals(strings[2], "color") && strings.length == 4) {
