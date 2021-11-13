@@ -3,6 +3,7 @@ package main.java.codes.anhgelus.architectsLand.command.faction;
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
 import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
 import main.java.codes.anhgelus.architectsLand.util.Static;
+import main.java.codes.anhgelus.architectsLand.util.SubCommandBase;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -11,9 +12,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
-import java.util.UUID;
 
-public class FactionCreate {
+public class FactionCreate implements SubCommandBase {
     private final String[] strings;
     private final CommandSender commandSender;
     private final ArchitectsLand main;
@@ -31,6 +31,7 @@ public class FactionCreate {
      *
      * @return true
      */
+    @Override
     public boolean command() {
         if (strings.length > 1) {
             File basesFile = new FactionCommand(main).getFactionsData();

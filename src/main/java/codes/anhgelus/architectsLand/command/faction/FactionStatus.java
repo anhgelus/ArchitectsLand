@@ -3,12 +3,13 @@ package main.java.codes.anhgelus.architectsLand.command.faction;
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
 import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
 import main.java.codes.anhgelus.architectsLand.util.Static;
+import main.java.codes.anhgelus.architectsLand.util.SubCommandBase;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 
-public class FactionStatus {
+public class FactionStatus implements SubCommandBase {
     private final String[] strings;
     private final CommandSender commandSender;
     private final ArchitectsLand main;

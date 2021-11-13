@@ -1,5 +1,6 @@
 package main.java.codes.anhgelus.architectsLand.tabCompleter;
 
+import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
 import main.java.codes.anhgelus.architectsLand.command.faction.FactionModify;
 import main.java.codes.anhgelus.architectsLand.util.Static;
 import org.bukkit.command.Command;
@@ -24,7 +25,7 @@ public class FactionCompleter implements TabCompleter {
         if(command.getName().equalsIgnoreCase("f")) {
             final String faction_indication = "<faction>";
             if(strings.length == 1) {
-                return Arrays.asList("create", "delete", "join", "leave", "status", "modify", "invite");
+                return FactionCommand.COMMANDS;
             /* all /f */
             } else if (Objects.equals(strings[0], "create") && strings.length == 2) {
                 return Arrays.asList(faction_indication);

@@ -3,6 +3,7 @@ package main.java.codes.anhgelus.architectsLand.command.faction;
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
 import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
 import main.java.codes.anhgelus.architectsLand.util.Static;
+import main.java.codes.anhgelus.architectsLand.util.SubCommandBase;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -12,7 +13,7 @@ import org.bukkit.entity.Player;
 import java.io.File;
 import java.util.Objects;
 
-public class FactionDelete {
+public class FactionDelete implements SubCommandBase {
     private final String[] strings;
     private final CommandSender commandSender;
     private final ArchitectsLand main;

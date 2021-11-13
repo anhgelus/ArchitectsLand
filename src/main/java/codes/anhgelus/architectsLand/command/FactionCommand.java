@@ -12,12 +12,15 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 public class FactionCommand implements CommandExecutor {
 
     public static final String PERMISSION_FACTION = ArchitectsLand.PERMISSION + "faction.";
     public static final String UUID_SEPARATOR = ",";
     public static final String FACTION_CHECKER_TARGET = ".status.name";
+    public static final List<String> COMMANDS = Arrays.asList("create", "delete", "join", "leave", "status", "modify", "invite");
 
     private final ArchitectsLand main;
 

@@ -1,9 +1,10 @@
 package main.java.codes.anhgelus.architectsLand.command.faction;
 
 import main.java.codes.anhgelus.architectsLand.util.Static;
+import main.java.codes.anhgelus.architectsLand.util.SubCommandBase;
 import org.bukkit.command.CommandSender;
 
-public class FactionHelp {
+public class FactionHelp implements SubCommandBase {
 
     private final CommandSender commandSender;
 
