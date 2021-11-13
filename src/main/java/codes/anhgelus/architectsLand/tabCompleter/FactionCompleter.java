@@ -22,7 +22,7 @@ public class FactionCompleter implements TabCompleter {
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
         /* Check the command name. */
         if(command.getName().equalsIgnoreCase("f")) {
-            final String faction_indication = "faction";
+            final String faction_indication = "<faction>";
             if(strings.length == 1) {
                 return Arrays.asList("create", "delete", "join", "leave", "status", "modify", "invite");
             /* all /f */
