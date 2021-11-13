@@ -34,6 +34,8 @@ public class FactionJoin {
             final File basesFile = new FactionCommand(main).getFactionsData();
             final YamlConfiguration config = YamlConfiguration.loadConfiguration(basesFile);
 
+            final Player sender = (Player) commandSender;
+
             // Check if the faction exist
             if (!FactionCommand.doubleFaction(config, strings[1])) {
                 commandSender.sendMessage(Static.ERROR + "This faction doesn't exist!");
@@ -42,6 +44,8 @@ public class FactionJoin {
 
             final String faction = strings[1].toLowerCase();
             final String playersString = config.getString(faction + ".members");
+            final String invitation = config.getString(faction + ".invitation");
+            final String[] invitations = invitation.split(FactionCommand.UUID_SEPARATOR);
             final String[] players = playersString.split(FactionCommand.UUID_SEPARATOR);
 
             // Check if the player is in the faction
@@ -52,11 +56,18 @@ public class FactionJoin {
                 }
             }
 
-            config.set(strings[1] + ".members", playersString + ((Player) commandSender).getUniqueId() + FactionCommand.UUID_SEPARATOR);
+            for (String i : invitations) {
+                if (Objects.equals(String.valueOf(sender.getUniqueId()), i)) {
+                    config.set(strings[1] + ".members", playersString + ((Player) commandSender).getUniqueId() + FactionCommand.UUID_SEPARATOR);
 
-            FactionCommand.saveFile(config, basesFile);
-            commandSender.sendMessage(Static.SUCCESS + "You joined " + strings[1] + "!");
-            ArchitectsLand.LOGGER.info(((Player) commandSender).getDisplayName() + " joined " + strings[1]);
+                    FactionCommand.saveFile(config, basesFile);
+                    commandSender.sendMessage(Static.SUCCESS + "You joined " + strings[1] + "!");
+                    ArchitectsLand.LOGGER.info(((Player) commandSender).getDisplayName() + " joined " + strings[1]);
+                    return true;
+                }
+            }
+
+            commandSender.sendMessage(Static.ERROR + "You can't join this faction!");
         } else {
             commandSender.sendMessage(Static.ERROR + "You need to specify the faction's name to join it!");
         }
