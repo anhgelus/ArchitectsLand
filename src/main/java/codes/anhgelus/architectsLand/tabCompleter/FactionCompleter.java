@@ -5,6 +5,7 @@ import main.java.codes.anhgelus.architectsLand.util.Static;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
 
 import java.util.*;
 
@@ -39,6 +40,8 @@ public class FactionCompleter implements TabCompleter {
             /* /f modify */
             } else if (Objects.equals(strings[0], "modify") && strings.length == 2) {
                 return Arrays.asList(faction_indication);
+            } else if (strings.length == 2) {
+                return Arrays.asList(((Player) commandSender).getDisplayName());
             } else if(Objects.equals(strings[0], "modify") && strings.length == 3) {
                 return FactionModify.MODIFY_TYPE;
             } else if (Objects.equals(strings[2], "color") && strings.length == 4) {
