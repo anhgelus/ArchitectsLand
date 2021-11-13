@@ -11,6 +11,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
+import java.util.UUID;
 
 public class FactionCreate {
     private final String[] strings;
@@ -35,6 +36,9 @@ public class FactionCreate {
             File basesFile = new FactionCommand(main).getFactionsData();
             final YamlConfiguration config = YamlConfiguration.loadConfiguration(basesFile);
 
+            File playersFile = new FactionCommand(main).getPlayersData();
+            final YamlConfiguration playerConfig = YamlConfiguration.loadConfiguration(playersFile);
+
             final String playerUUID = String.valueOf(((Player) commandSender).getUniqueId());
 
             final String key = strings[1].toLowerCase();
@@ -52,14 +56,19 @@ public class FactionCreate {
 
             // Set every args in factions.yml
             config.set(key + ".owner", playerUUID);
-            config.set(key + ".members", playerUUID + ",");
+            config.set(key + ".members", playerUUID + FactionCommand.UUID_SEPARATOR);
+            config.set(key + ".invitation", "");
             config.set(key + status + ".description", "No description set. Use /f modify description to set it.");
             config.set(key + status + ".prefix", prefix);
             config.set(key + status + ".name", strings[1]);
             config.set(key + status + ".color", "white");
             config.set(key + status + ".prefix-color", "white");
 
-            FactionCommand.saveFile(config, basesFile);
+            // Set every args in players.yml
+            playerConfig.set(playerUUID + ".faction", key);
+
+            FactionCommand.saveFile(config, basesFile); //save factions.yml
+            FactionCommand.saveFile(playerConfig, playersFile); //save players.yml
 
             // Set every args in Minecraft team in game
             ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();

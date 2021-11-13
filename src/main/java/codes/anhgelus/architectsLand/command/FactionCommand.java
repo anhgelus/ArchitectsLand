@@ -2,6 +2,7 @@ package main.java.codes.anhgelus.architectsLand.command;
 
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
 import main.java.codes.anhgelus.architectsLand.command.faction.*;
+import main.java.codes.anhgelus.architectsLand.manager.DataManager;
 import main.java.codes.anhgelus.architectsLand.util.Static;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -58,6 +59,9 @@ public class FactionCommand implements CommandExecutor {
                 } else if (strings[0].equals("status") && commandSender.hasPermission(FactionStatus.PERMISSION) && commandSender.isOp()) {
                     final FactionStatus fStatus = new FactionStatus(strings, commandSender, main);
                     return fStatus.command();
+                } else if (strings[0].equals("invite") && commandSender.hasPermission(FactionStatus.PERMISSION) && commandSender.isOp()) {
+                    final FactionInvite fInvite = new FactionInvite(strings, commandSender, main);
+                    return fInvite.command();
                 }
                 commandSender.sendMessage(Static.ERROR + "You don't have the permission to do this!");
                 return true;
@@ -70,12 +74,21 @@ public class FactionCommand implements CommandExecutor {
     }
 
     /**
-     * Get the factions data (factions.yml)
+     * Get the factions' data (factions.yml)
      *
      * @return Factions data file
      */
     public File getFactionsData() {
         return new File(this.main.getDataFolder(), "data/factions.yml");
+    }
+
+    /**
+     * Get the players' data (player.yml)
+     *
+     * @return Factions data file
+     */
+    public File getPlayersData() {
+        return new File(this.main.getDataFolder(), "data/players.yml");
     }
 
     /**
@@ -85,11 +98,8 @@ public class FactionCommand implements CommandExecutor {
      * @param basesFile File to save (File)
      */
     public static void saveFile(YamlConfiguration config, File basesFile) {
-        try {
-            config.save(basesFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        DataManager dm = new DataManager("yml");
+        dm.save(config, basesFile);
     }
 
     /**
