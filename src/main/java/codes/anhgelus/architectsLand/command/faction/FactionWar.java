@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
@@ -102,6 +103,9 @@ public class FactionWar implements SubCommandBase {
                 i.playSound(i.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             }
 
+            final String message = "**`[WAR]`** " + config.getString(senderFaction + status + "name") + " declared the war on " + config.getString(factionAgainst + status + "name") + "!";
+            ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+            Bukkit.dispatchCommand(console, "discord broadcast " + message);
             commandSender.sendMessage(Static.SUCCESS + "The war was declared!");
             ArchitectsLand.LOGGER.info("Faction " + strings[1] + " declared the war on " + factionAgainst + " by " + ((Player) commandSender).getDisplayName());
         }

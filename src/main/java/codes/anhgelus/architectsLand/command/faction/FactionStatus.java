@@ -46,6 +46,12 @@ public class FactionStatus implements SubCommandBase {
             final String fPrefix = config.getString(key + status + "prefix");
             final String fColor = config.getString(key + status + "color");
             final String fDesc = config.getString(key + status + "description");
+            String fWar = config.getString(key + status + "war").replace(",", ", ");
+            String fAlliance = config.getString(key + status + "alliance").replace(",", ", ");
+            if (fAlliance.equals(""))
+                fAlliance = "Teaming with no one";
+            if (fWar.equals(""))
+                fWar = "Against no one";
 
             commandSender.sendMessage(Static.SEPARATOR + Static.EOL +
                     Static.IMPORTANT + strings[1].substring(0, 1).toUpperCase() + strings[1].substring(1) + " status:" + Static.EOL +
@@ -53,6 +59,9 @@ public class FactionStatus implements SubCommandBase {
                     Static.SUCCESS + "Prefix: " + Static.EXAMPLE + fPrefix + Static.EOL +
                     Static.SUCCESS + "Color: " + Static.EXAMPLE + fColor + Static.EOL +
                     Static.SUCCESS + "Description: " + Static.EXAMPLE + fDesc + Static.EOL +
+                    Static.SEPARATOR_COLOR + "---" + Static.EOL +
+                    Static.SUCCESS + "In war against: " + fWar + Static.EOL +
+                    Static.SUCCESS + "In alliance with: " + fAlliance + Static.EOL +
                     Static.SEPARATOR + Static.EOL);
         } else {
             commandSender.sendMessage(Static.ERROR + "You need to specify the faction's name to delete a faction!");

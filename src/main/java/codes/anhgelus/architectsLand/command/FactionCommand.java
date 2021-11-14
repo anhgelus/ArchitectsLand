@@ -60,7 +60,7 @@ public class FactionCommand implements CommandExecutor {
                 } else if (permissionChecker(strings[0], commandSender, new String[]{"modify"}, FactionModify.PERMISSION)) {
                     final FactionModify fModify = new FactionModify(strings, commandSender, main);
                     return fModify.command();
-                } else if (permissionChecker(strings[0], commandSender, new String[]{"alliance"}, FactionStatus.PERMISSION)) {
+                } else if (permissionChecker(strings[0], commandSender, new String[]{"status"}, FactionStatus.PERMISSION)) {
                     final FactionStatus fStatus = new FactionStatus(strings, commandSender, main);
                     return fStatus.command();
                 } else if (permissionChecker(strings[0], commandSender, new String[]{"invite"}, FactionInvite.PERMISSION)) {

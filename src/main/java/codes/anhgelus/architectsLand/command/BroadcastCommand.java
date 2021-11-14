@@ -77,7 +77,7 @@ public class BroadcastCommand implements CommandExecutor {
                 for (Player i : players) {
                     i.sendMessage(message);
                 }
-                message = "**[BROADCAST]** " + Static.arrayToString(strings) + "*- par " + player.getDisplayName() + "*";
+                message = "**`[BROADCAST]`** " + Static.arrayToString(strings) + "*- par " + player.getDisplayName() + "*";
                 ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
                 Bukkit.dispatchCommand(console, "discord broadcast " + message);
             } else {

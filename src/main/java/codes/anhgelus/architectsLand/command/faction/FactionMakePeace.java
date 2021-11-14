@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
@@ -95,6 +96,9 @@ public class FactionMakePeace implements SubCommandBase {
                 i.playSound(i.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             }
 
+            final String message = "**`[END OF WAR]`** " + config.getString(senderFaction + status + "name") + " make peace with " + config.getString(factionAgainst + status + "name") + "!";
+            ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+            Bukkit.dispatchCommand(console, "discord broadcast " + message);
             commandSender.sendMessage(Static.SUCCESS + "You make peace with " + factionAgainst + "!");
             ArchitectsLand.LOGGER.info("Faction " + strings[1] + " broke the alliance with " + factionAgainst + " by " + ((Player) commandSender).getDisplayName());
         }

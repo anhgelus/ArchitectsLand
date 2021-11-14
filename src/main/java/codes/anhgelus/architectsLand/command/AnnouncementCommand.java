@@ -3,7 +3,6 @@ package main.java.codes.anhgelus.architectsLand.command;
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
 import main.java.codes.anhgelus.architectsLand.util.Static;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -43,7 +42,7 @@ public class AnnouncementCommand implements CommandExecutor {
                 for (Player i : players) {
                     i.sendMessage(message);
                 }
-                message = "**[ANNOUNCEMENT]** " + Static.arrayToString(strings);
+                message = "**`[ANNOUNCEMENT]`** " + Static.arrayToString(strings);
                 ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
                 Bukkit.dispatchCommand(console, "discord broadcast " + message);
             } else {

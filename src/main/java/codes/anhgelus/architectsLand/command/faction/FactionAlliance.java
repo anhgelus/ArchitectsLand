@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
@@ -103,6 +104,9 @@ public class FactionAlliance implements SubCommandBase {
                 i.playSound(i.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             }
 
+            final String message = "**`[ALLIANCE]`** " + config.getString(senderFaction + status + "name") + " declared the alliance with " + config.getString(factionAgainst + status + "name") + "!";
+            ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+            Bukkit.dispatchCommand(console, "discord broadcast " + message);
             commandSender.sendMessage(Static.SUCCESS + "The alliance was declared!");
             ArchitectsLand.LOGGER.info("Faction " + strings[1] + " declared the alliance with " + factionAgainst + " by " + ((Player) commandSender).getDisplayName());
         }
