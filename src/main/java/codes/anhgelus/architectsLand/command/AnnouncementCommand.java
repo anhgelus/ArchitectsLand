@@ -3,9 +3,11 @@ package main.java.codes.anhgelus.architectsLand.command;
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
 import main.java.codes.anhgelus.architectsLand.util.Static;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 public class AnnouncementCommand implements CommandExecutor {
@@ -37,14 +39,17 @@ public class AnnouncementCommand implements CommandExecutor {
                 // Get every players
                 final Player[] players = Bukkit.getServer().getOnlinePlayers().toArray(new Player[0]);
 
+                String message = Static.SEPARATOR + Static.EOL + Static.SUCCESS + Static.arrayToString(strings) + Static.EOL + Static.SEPARATOR;
                 for (Player i : players) {
-                    final String message = Static.arrayToString(strings);
-                    i.sendMessage( Static.SEPARATOR + Static.EOL +
-                            Static.SUCCESS + message + Static.EOL +
-                            Static.SEPARATOR);
+                    i.sendMessage(message);
                 }
-                return true;
+                message = "**[ANNOUNCEMENT]** " + Static.arrayToString(strings);
+                ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+                Bukkit.dispatchCommand(console, "discord broadcast " + message);
+            } else {
+                commandSender.sendMessage(Static.ERROR + "You need to specify the message to send it!");
             }
+            return true;
         }
         return false;
     }
