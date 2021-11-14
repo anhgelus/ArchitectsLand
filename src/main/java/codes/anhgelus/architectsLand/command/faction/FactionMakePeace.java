@@ -13,17 +13,16 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
-public class FactionBreakAlliance implements SubCommandBase {
+public class FactionMakePeace implements SubCommandBase {
     private final String[] strings;
     private final CommandSender commandSender;
     private final ArchitectsLand main;
 
-    public static final String PERMISSION = FactionCommand.PERMISSION_FACTION + "breakalliance";
+    public static final String PERMISSION = FactionCommand.PERMISSION_FACTION + "makepeace";
 
-    public FactionBreakAlliance (String[] strings, CommandSender commandSender, ArchitectsLand main) {
+    public FactionMakePeace (String[] strings, CommandSender commandSender, ArchitectsLand main) {
         this.strings = strings;
         this.commandSender = commandSender;
         this.main = main;
@@ -67,11 +66,11 @@ public class FactionBreakAlliance implements SubCommandBase {
 
             final String status = ".status.";
             final String factionAgainst = strings[1].toLowerCase();
-            final String[] alliances = config.getString(senderFaction + status + "alliance").split(FactionCommand.UUID_SEPARATOR);
+            final String[] wars = config.getString(senderFaction + status + "war").split(FactionCommand.UUID_SEPARATOR);
 
             //Check if they are in alliance
-            if (!Arrays.asList(config.getString(senderFaction + status + "alliance").split(FactionCommand.UUID_SEPARATOR)).contains(factionAgainst)) {
-                commandSender.sendMessage(Static.ERROR + "You're not in alliance with " + factionAgainst + "!");
+            if (!Arrays.asList(config.getString(senderFaction + status + "war").split(FactionCommand.UUID_SEPARATOR)).contains(factionAgainst)) {
+                commandSender.sendMessage(Static.ERROR + "You're not in war with " + factionAgainst + "!");
                 return true;
             }
 
@@ -80,23 +79,23 @@ public class FactionBreakAlliance implements SubCommandBase {
                 return true;
             }
 
-            final String newAllianceAgainst = Static.removeStringInArray(alliances, senderFaction);
-            final String newAllianceSender = Static.removeStringInArray(alliances, factionAgainst);
+            final String newAllianceAgainst = Static.removeStringInArray(wars, senderFaction);
+            final String newAllianceSender = Static.removeStringInArray(wars, factionAgainst);
 
-            config.set(senderFaction + status + "alliance", newAllianceSender);
-            config.set(factionAgainst + status + "alliance", newAllianceAgainst);
+            config.set(senderFaction + status + "war", newAllianceSender);
+            config.set(factionAgainst + status + "war", newAllianceAgainst);
 
             FactionCommand.saveFile(config, basesFile); //save factions.yml
 
             final Player[] players = Bukkit.getServer().getOnlinePlayers().toArray(new Player[0]);
 
             for (Player i : players) {
-                i.sendMessage(Static.SEPARATOR_COLOR + "[" + ChatColor.GREEN + "END OF ALLIANCE" + Static.SEPARATOR_COLOR + "] " +
-                        Static.SUCCESS + config.getString(senderFaction + status + "name") + " broke the alliance with " + config.getString(factionAgainst + status + "name") + "!");
+                i.sendMessage(Static.SEPARATOR_COLOR + "[" + ChatColor.GREEN + "END OF WAR" + Static.SEPARATOR_COLOR + "] " +
+                        Static.SUCCESS + config.getString(senderFaction + status + "name") + " make peace with " + config.getString(factionAgainst + status + "name") + "!");
                 i.playSound(i.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             }
 
-            commandSender.sendMessage(Static.SUCCESS + "The alliance was broken!");
+            commandSender.sendMessage(Static.SUCCESS + "You make peace with " + factionAgainst + "!");
             ArchitectsLand.LOGGER.info("Faction " + strings[1] + " broke the alliance with " + factionAgainst + " by " + ((Player) commandSender).getDisplayName());
         }
         return true;

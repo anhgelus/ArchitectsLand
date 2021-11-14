@@ -20,7 +20,7 @@ public class FactionCommand implements CommandExecutor {
     public static final String PERMISSION_FACTION = ArchitectsLand.PERMISSION + "faction.";
     public static final String UUID_SEPARATOR = ",";
     public static final String FACTION_CHECKER_TARGET = ".status.name";
-    public static final List<String> COMMANDS = Arrays.asList("create", "delete", "join", "leave", "status", "modify", "invite", "war", "alliance", "beakalliance", "break", "ba");
+    public static final List<String> COMMANDS = Arrays.asList("create", "delete", "join", "leave", "status", "modify", "invite", "war", "alliance", "beakalliance", "break", "ba", "makepeace", "peace");
 
     private final ArchitectsLand main;
 
@@ -71,9 +71,12 @@ public class FactionCommand implements CommandExecutor {
                 } else if (strings[0].equals("alliance") && (commandSender.hasPermission(FactionAlliance.PERMISSION) || commandSender.isOp())) {
                     final FactionAlliance fAlliance = new FactionAlliance(strings, commandSender, main);
                     return fAlliance.command();
-                } else if ((strings[0].equals("break") || strings[0].equals("breakalliance") || strings[0].equals("ba")) && (commandSender.hasPermission(FactionAlliance.PERMISSION) || commandSender.isOp())) {
+                } else if ((strings[0].equals("break") || strings[0].equals("breakalliance") || strings[0].equals("ba")) && (commandSender.hasPermission(FactionBreakAlliance.PERMISSION) || commandSender.isOp())) {
                     final FactionBreakAlliance fBreak = new FactionBreakAlliance(strings, commandSender, main);
                     return fBreak.command();
+                } else if ((strings[0].equals("makepeace") || strings[0].equals("peace")) && (commandSender.hasPermission(FactionMakePeace.PERMISSION) || commandSender.isOp())) {
+                    final FactionMakePeace fPeace = new FactionMakePeace(strings, commandSender, main);
+                    return fPeace.command();
                 }
                 commandSender.sendMessage(Static.ERROR + "You don't have the permission to do this!");
                 return true;
