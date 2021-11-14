@@ -21,7 +21,7 @@ public class FactionCommand implements CommandExecutor {
     public static final String PERMISSION_FACTION = ArchitectsLand.PERMISSION + "faction.";
     public static final String UUID_SEPARATOR = ",";
     public static final String FACTION_CHECKER_TARGET = ".status.name";
-    public static final List<String> COMMANDS = Arrays.asList("create", "delete", "join", "leave", "status", "modify", "invite", "war", "alliance", "beakalliance", "break", "ba", "makepeace", "peace");
+    public static final List<String> COMMANDS = Arrays.asList("create", "delete", "join", "leave", "status", "modify", "invite", "war", "alliance", "beakalliance", "break", "ba", "makepeace", "peace", "list");
 
     private final ArchitectsLand main;
 
@@ -78,6 +78,9 @@ public class FactionCommand implements CommandExecutor {
                 } else if (permissionChecker(strings[0], commandSender, new String[]{"peace", "makepeace"}, FactionMakePeace.PERMISSION)) {
                     final FactionMakePeace fPeace = new FactionMakePeace(strings, commandSender, main);
                     return fPeace.command();
+                } else if (permissionChecker(strings[0], commandSender, new String[]{"list"}, FactionList.PERMISSION)) {
+                    final FactionList fList = new FactionList(strings, commandSender, main);
+                    return fList.command();
                 }
                 commandSender.sendMessage(Static.ERROR + "You don't have the permission to do this!");
                 return true;
