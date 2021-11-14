@@ -1,9 +1,11 @@
 package main.java.codes.anhgelus.architectsLand.command.faction;
 
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
+import main.java.codes.anhgelus.architectsLand.command.AnnouncementCommand;
 import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
 import main.java.codes.anhgelus.architectsLand.util.Static;
 import main.java.codes.anhgelus.architectsLand.util.SubCommandBase;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -62,6 +64,10 @@ public class FactionJoin implements SubCommandBase {
                     config.set(strings[1] + ".members", playersString + ((Player) commandSender).getUniqueId() + FactionCommand.UUID_SEPARATOR);
 
                     FactionCommand.saveFile(config, basesFile);
+
+                    AnnouncementCommand.announcement("faction",
+                            ((Player) commandSender).getDisplayName() + "joined " + strings[1] + "!",
+                            Bukkit.getOnlinePlayers().toArray(new Player[0]));
                     commandSender.sendMessage(Static.SUCCESS + "You joined " + strings[1] + "!");
                     ArchitectsLand.LOGGER.info(((Player) commandSender).getDisplayName() + " joined " + strings[1]);
                     return true;

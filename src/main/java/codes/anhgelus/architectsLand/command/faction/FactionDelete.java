@@ -1,6 +1,7 @@
 package main.java.codes.anhgelus.architectsLand.command.faction;
 
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
+import main.java.codes.anhgelus.architectsLand.command.AnnouncementCommand;
 import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
 import main.java.codes.anhgelus.architectsLand.util.Static;
 import main.java.codes.anhgelus.architectsLand.util.SubCommandBase;
@@ -36,6 +37,12 @@ public class FactionDelete implements SubCommandBase {
             File basesFile = new FactionCommand(main).getFactionsData();
             final YamlConfiguration config = YamlConfiguration.loadConfiguration(basesFile);
 
+            File playersFile = new FactionCommand(main).getPlayersData();
+            final YamlConfiguration playerConfig = YamlConfiguration.loadConfiguration(playersFile);
+
+            File listFile = new FactionCommand(main).getListData();
+            final YamlConfiguration listConfig = YamlConfiguration.loadConfiguration(listFile);
+
             final String playerUUID = String.valueOf(((Player) commandSender).getUniqueId());
 
             final String key = strings[1].toLowerCase();
@@ -52,12 +59,35 @@ public class FactionDelete implements SubCommandBase {
                 return true;
             }
 
+            // Set every args in factions.yml
             config.set(key, null);
-            FactionCommand.saveFile(config, basesFile);
+
+            // Set every args in players.yml
+            playerConfig.set(playerUUID + ".faction", null);
+
+            // Set every args in list.yml
+            final String factionsString = listConfig.getString("factions");
+
+            if (factionsString == null) {
+                /* Set the factions in lists.yml */
+                listConfig.set("factions", null);
+            } else {
+                final String newFactions = Static.removeStringInArray(factionsString.split(FactionCommand.UUID_SEPARATOR), key);
+
+                /* Set the factions in lists.yml */
+                listConfig.set("factions", newFactions);
+            }
+
+            FactionCommand.saveFile(config, basesFile); // save factions.yml
+            FactionCommand.saveFile(playerConfig, playersFile); // save players.yml
+            FactionCommand.saveFile(listConfig, listFile); // save lists.yml
 
             ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
             Bukkit.dispatchCommand(console, "team remove " + key);
 
+            AnnouncementCommand.announcement("faction",
+                    "The faction " + strings[1] + " was deleted by " + ((Player) commandSender).getDisplayName(),
+                    Bukkit.getOnlinePlayers().toArray(new Player[0]));
             commandSender.sendMessage(Static.SUCCESS + "The faction was deleted!");
             ArchitectsLand.LOGGER.info("Faction " + strings[1] + " was deleted by " + ((Player) commandSender).getDisplayName());
         } else {

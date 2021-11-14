@@ -1,6 +1,7 @@
 package main.java.codes.anhgelus.architectsLand.command.faction;
 
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
+import main.java.codes.anhgelus.architectsLand.command.AnnouncementCommand;
 import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
 import main.java.codes.anhgelus.architectsLand.util.Static;
 import main.java.codes.anhgelus.architectsLand.util.SubCommandBase;
@@ -88,17 +89,9 @@ public class FactionMakePeace implements SubCommandBase {
 
             FactionCommand.saveFile(config, basesFile); //save factions.yml
 
-            final Player[] players = Bukkit.getServer().getOnlinePlayers().toArray(new Player[0]);
-
-            for (Player i : players) {
-                i.sendMessage(Static.SEPARATOR_COLOR + "[" + ChatColor.GREEN + "END OF WAR" + Static.SEPARATOR_COLOR + "] " +
-                        Static.SUCCESS + config.getString(senderFaction + status + "name") + " make peace with " + config.getString(factionAgainst + status + "name") + "!");
-                i.playSound(i.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            }
-
-            final String message = "**`[END OF WAR]`** " + config.getString(senderFaction + status + "name") + " make peace with " + config.getString(factionAgainst + status + "name") + "!";
-            ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
-            Bukkit.dispatchCommand(console, "discord broadcast " + message);
+            AnnouncementCommand.announcement("end of war",
+                    config.getString(senderFaction + status + "name") + " make peace with " + config.getString(factionAgainst + status + "name") + "!",
+                    Bukkit.getOnlinePlayers().toArray(new Player[0]));
             commandSender.sendMessage(Static.SUCCESS + "You make peace with " + factionAgainst + "!");
             ArchitectsLand.LOGGER.info("Faction " + strings[1] + " broke the alliance with " + factionAgainst + " by " + ((Player) commandSender).getDisplayName());
         }

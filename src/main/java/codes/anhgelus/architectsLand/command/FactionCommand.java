@@ -108,6 +108,15 @@ public class FactionCommand implements CommandExecutor {
     }
 
     /**
+     * Get the lists' data (lists.yml)
+     *
+     * @return Lists data file
+     */
+    public File getListData() {
+        return new File(this.main.getDataFolder(), "data/lists.yml");
+    }
+
+    /**
      * Save YML File
      *
      * @param config Config to save (YamlConfiguration)

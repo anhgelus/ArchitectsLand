@@ -3,6 +3,7 @@ package main.java.codes.anhgelus.architectsLand.command;
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
 import main.java.codes.anhgelus.architectsLand.util.Static;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -37,19 +38,35 @@ public class AnnouncementCommand implements CommandExecutor {
             if (strings.length != 0) {
                 // Get every players
                 final Player[] players = Bukkit.getServer().getOnlinePlayers().toArray(new Player[0]);
-
                 String message = Static.SEPARATOR + Static.EOL + Static.SUCCESS + Static.arrayToString(strings) + Static.EOL + Static.SEPARATOR;
-                for (Player i : players) {
-                    i.sendMessage(message);
-                }
-                message = "**`[ANNOUNCEMENT]`** " + Static.arrayToString(strings);
-                ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
-                Bukkit.dispatchCommand(console, "discord broadcast " + message);
+
+                announcement("ANNOUNCEMENT", Static.arrayToString(strings), players);
             } else {
                 commandSender.sendMessage(Static.ERROR + "You need to specify the message to send it!");
             }
             return true;
         }
         return false;
+    }
+
+    /**
+     * Send an announcement
+     *
+     * @param type Type of announcement (word(s) in [here])
+     * @param discordContent Message content for discord
+     * @param players Players of the server
+     */
+    public static void announcement(String type, String discordContent, Player[] players) {
+        // Discord part
+        String message = "**`["+ type.toUpperCase() +"]`** " + discordContent;
+        ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
+        Bukkit.dispatchCommand(console, "discord broadcast " + message);
+
+        // Minecraft part
+        for (Player i : players) {
+            String minecraftMessage = Static.SEPARATOR_COLOR + "[" + ChatColor.GREEN + type.toUpperCase() + Static.SEPARATOR_COLOR + "] " +
+                    Static.SUCCESS + discordContent;
+            i.sendMessage(minecraftMessage);
+        }
     }
 }

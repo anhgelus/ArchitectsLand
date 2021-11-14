@@ -1,6 +1,7 @@
 package main.java.codes.anhgelus.architectsLand.command.faction;
 
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
+import main.java.codes.anhgelus.architectsLand.command.AnnouncementCommand;
 import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
 import main.java.codes.anhgelus.architectsLand.util.Static;
 import main.java.codes.anhgelus.architectsLand.util.SubCommandBase;
@@ -95,17 +96,9 @@ public class FactionWar implements SubCommandBase {
 
             FactionCommand.saveFile(config, basesFile); //save factions.yml
 
-            final Player[] players = Bukkit.getServer().getOnlinePlayers().toArray(new Player[0]);
-
-            for (Player i : players) {
-                i.sendMessage(Static.SEPARATOR_COLOR + "[" + ChatColor.GREEN + "WAR" + Static.SEPARATOR_COLOR + "] " +
-                        Static.SUCCESS + config.getString(senderFaction + status + "name") + " declared the war on " + config.getString(factionAgainst + status + "name") + "!");
-                i.playSound(i.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            }
-
-            final String message = "**`[WAR]`** " + config.getString(senderFaction + status + "name") + " declared the war on " + config.getString(factionAgainst + status + "name") + "!";
-            ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
-            Bukkit.dispatchCommand(console, "discord broadcast " + message);
+            AnnouncementCommand.announcement("war",
+                    config.getString(senderFaction + status + "name") + " declared the war on " + config.getString(factionAgainst + status + "name") + "!",
+                    Bukkit.getOnlinePlayers().toArray(new Player[0]));
             commandSender.sendMessage(Static.SUCCESS + "The war was declared!");
             ArchitectsLand.LOGGER.info("Faction " + strings[1] + " declared the war on " + factionAgainst + " by " + ((Player) commandSender).getDisplayName());
         }

@@ -68,18 +68,9 @@ public class BroadcastCommand implements CommandExecutor {
 
             // Check if the command has args
             if (strings.length != 0) {
-                // Get every players
-                final Player[] players = Bukkit.getServer().getOnlinePlayers().toArray(new Player[0]);
-
-                String message = Static.SEPARATOR_COLOR + "[" + ChatColor.GREEN + "BROADCAST" + Static.SEPARATOR_COLOR + "]" +
-                        Static.SUCCESS + Static.arrayToString(strings) +
-                        Static.EXAMPLE + " - par " + player.getDisplayName();
-                for (Player i : players) {
-                    i.sendMessage(message);
-                }
-                message = "**`[BROADCAST]`** " + Static.arrayToString(strings) + "*- par " + player.getDisplayName() + "*";
-                ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
-                Bukkit.dispatchCommand(console, "discord broadcast " + message);
+                AnnouncementCommand.announcement("broadcast",
+                        Static.arrayToString(strings) + "*- par " + player.getDisplayName() + "*",
+                        Bukkit.getOnlinePlayers().toArray(new Player[0]));
             } else {
                 commandSender.sendMessage(Static.ERROR + "You need to specify the message to send it!");
             }

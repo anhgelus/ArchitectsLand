@@ -1,6 +1,7 @@
 package main.java.codes.anhgelus.architectsLand.command.faction;
 
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
+import main.java.codes.anhgelus.architectsLand.command.AnnouncementCommand;
 import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
 import main.java.codes.anhgelus.architectsLand.util.Static;
 import main.java.codes.anhgelus.architectsLand.util.SubCommandBase;
@@ -86,6 +87,9 @@ public class FactionCreate implements SubCommandBase {
             Bukkit.dispatchCommand(console, "team join " + key + " " + ((Player) commandSender).getDisplayName());
             Bukkit.dispatchCommand(console, "team modify " + key + " prefix " + prefixTeam);
 
+            AnnouncementCommand.announcement("faction",
+                    "The faction " + strings[1] + " was created by " + ((Player) commandSender).getDisplayName(),
+                    Bukkit.getOnlinePlayers().toArray(new Player[0]));
             commandSender.sendMessage(Static.SUCCESS + "The faction was created!");
             ArchitectsLand.LOGGER.info("Faction " + strings[1] + " was created by " + ((Player) commandSender).getDisplayName());
         } else {
