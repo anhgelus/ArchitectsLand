@@ -22,7 +22,6 @@ public class FactionAlliance implements SubCommandBase {
     private final ArchitectsLand main;
 
     public static final String PERMISSION = FactionCommand.PERMISSION_FACTION + "alliance";
-    public static final List<String> MODIFY_TYPE = Arrays.asList("prefix", "name", "color", "description", "prefix-color");
 
     public FactionAlliance (String[] strings, CommandSender commandSender, ArchitectsLand main) {
         this.strings = strings;
@@ -30,6 +29,11 @@ public class FactionAlliance implements SubCommandBase {
         this.main = main;
     }
 
+    /**
+     * Execute the command
+     *
+     * @return true
+     */
     @Override
     public boolean command() {
         if (strings.length > 1) {
@@ -84,10 +88,10 @@ public class FactionAlliance implements SubCommandBase {
             }
 
 
-            final String war = config.getString(senderFaction + status + "alliance");
+            final String alliance = config.getString(senderFaction + status + "alliance");
 
-            config.set(senderFaction + status + "alliance", war + factionAgainst + FactionCommand.UUID_SEPARATOR);
-            config.set(factionAgainst + status + "alliance", war + senderFaction + FactionCommand.UUID_SEPARATOR);
+            config.set(senderFaction + status + "alliance", alliance + factionAgainst + FactionCommand.UUID_SEPARATOR);
+            config.set(factionAgainst + status + "alliance", alliance + senderFaction + FactionCommand.UUID_SEPARATOR);
 
             FactionCommand.saveFile(config, basesFile); //save factions.yml
 
