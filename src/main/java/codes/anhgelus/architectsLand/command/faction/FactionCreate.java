@@ -40,6 +40,9 @@ public class FactionCreate implements SubCommandBase {
             File playersFile = new FactionCommand(main).getPlayersData();
             final YamlConfiguration playerConfig = YamlConfiguration.loadConfiguration(playersFile);
 
+            File listFile = new FactionCommand(main).getListData();
+            final YamlConfiguration listConfig = YamlConfiguration.loadConfiguration(listFile);
+
             final String playerUUID = String.valueOf(((Player) commandSender).getUniqueId());
 
             final String key = strings[1].toLowerCase();
@@ -70,8 +73,12 @@ public class FactionCreate implements SubCommandBase {
             // Set every args in players.yml
             playerConfig.set(playerUUID + ".faction", key);
 
+            //Set every args in list.yml
+            listConfig.set("factions", key + FactionCommand.UUID_SEPARATOR);
+
             FactionCommand.saveFile(config, basesFile); //save factions.yml
             FactionCommand.saveFile(playerConfig, playersFile); //save players.yml
+            FactionCommand.saveFile(listConfig, listFile); //save lists.yml
 
             // Set every args in Minecraft team in game
             ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
