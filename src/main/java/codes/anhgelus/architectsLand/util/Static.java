@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Static {
@@ -107,5 +108,39 @@ public class Static {
             tabCompletion.add(i.getDisplayName());
         }
         return tabCompletion;
+    }
+
+    /**
+     * Remove a string in an array
+     *
+     * @param array Array
+     * @param toRemove String to remove
+     * @return string without string toRemove
+     */
+    public static String removeStringInArray(String[] array, String toRemove) {
+        String str = new String();
+        for (String n : array) {
+            if (!Objects.equals(toRemove, n)) {
+                str = str + " " + n;
+            }
+        }
+        return str;
+    }
+
+    /**
+     * Remove a string in an array
+     *
+     * @param array Array
+     * @param toRemove String to remove
+     * @return array without string toRemove
+     */
+    public static String[] removeStringInArrayReturnArray(String[] array, String toRemove) {
+        String str = new String();
+        for (String n : array) {
+            if (!Objects.equals(toRemove, n)) {
+                str = str + " " + n;
+            }
+        }
+        return str.split(" ");
     }
 }

@@ -1,7 +1,8 @@
 main: main.java.codes.anhgelus.architectsLand.ArchitectsLand
 name: ArchitectsLand
-version: 0.4.2-beta.7
+version: 0.5.4-dev.6
 author: Anhgelus
+depend: [DisordSRV]
 commands:
   f:
     description: Faction base command

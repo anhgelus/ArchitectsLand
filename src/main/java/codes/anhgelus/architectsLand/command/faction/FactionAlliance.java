@@ -13,16 +13,17 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
-public class FactionWar implements SubCommandBase {
+public class FactionAlliance implements SubCommandBase {
     private final String[] strings;
     private final CommandSender commandSender;
     private final ArchitectsLand main;
 
-    public static final String PERMISSION = FactionCommand.PERMISSION_FACTION + "war";
+    public static final String PERMISSION = FactionCommand.PERMISSION_FACTION + "alliance";
 
-    public FactionWar (String[] strings, CommandSender commandSender, ArchitectsLand main) {
+    public FactionAlliance (String[] strings, CommandSender commandSender, ArchitectsLand main) {
         this.strings = strings;
         this.commandSender = commandSender;
         this.main = main;
@@ -68,42 +69,42 @@ public class FactionWar implements SubCommandBase {
             final String factionAgainst = strings[1].toLowerCase();
 
             //Check if the war is already declared
-            if (Arrays.asList(config.getString(senderFaction + status + "war").split(FactionCommand.UUID_SEPARATOR)).contains(factionAgainst)) {
-                commandSender.sendMessage(Static.ERROR + "You already declared the war on " + factionAgainst + "!");
+            if (Arrays.asList(config.getString(senderFaction + status + "alliance").split(FactionCommand.UUID_SEPARATOR)).contains(factionAgainst)) {
+                commandSender.sendMessage(Static.ERROR + "You already declared the alliance with " + factionAgainst + "!");
                 return true;
             }
 
             if (factionAgainst.equals(senderFaction)) {
-                commandSender.sendMessage(Static.ERROR + "Are you kidding me? You're stupid. You need a ban...");
+                commandSender.sendMessage(Static.ERROR + "AHAHAHHAHAHAHAHAHAHHAHAHAH");
                 return true;
             }
 
-            //Check if they are in alliance
-            if (config.getString(senderFaction + status + "alliance") != null) {
-                if (Arrays.asList(config.getString(senderFaction + status + "alliance").split(FactionCommand.UUID_SEPARATOR)).contains(factionAgainst)) {
-                    commandSender.sendMessage(Static.ERROR + "Bro, please, you're in alliance with them!");
+            //Check if they are in war
+            if (config.getString(senderFaction + status + "war") != null) {
+                if (Arrays.asList(config.getString(senderFaction + status + "war").split(FactionCommand.UUID_SEPARATOR)).contains(factionAgainst)) {
+                    commandSender.sendMessage(Static.ERROR + "Bro, please, you're on war with them!");
                     return true;
                 }
             }
 
 
-            final String war = config.getString(senderFaction + status + "war");
+            final String alliance = config.getString(senderFaction + status + "alliance");
 
-            config.set(senderFaction + status + "war", war + factionAgainst + FactionCommand.UUID_SEPARATOR);
-            config.set(factionAgainst + status + "war", war + senderFaction + FactionCommand.UUID_SEPARATOR);
+            config.set(senderFaction + status + "alliance", alliance + factionAgainst + FactionCommand.UUID_SEPARATOR);
+            config.set(factionAgainst + status + "alliance", alliance + senderFaction + FactionCommand.UUID_SEPARATOR);
 
             FactionCommand.saveFile(config, basesFile); //save factions.yml
 
             final Player[] players = Bukkit.getServer().getOnlinePlayers().toArray(new Player[0]);
 
             for (Player i : players) {
-                i.sendMessage(Static.SEPARATOR_COLOR + "[" + ChatColor.GREEN + "WAR" + Static.SEPARATOR_COLOR + "] " +
-                        Static.SUCCESS + config.getString(senderFaction + status + "name") + " declared the war on " + config.getString(factionAgainst + status + "name") + "!");
+                i.sendMessage(Static.SEPARATOR_COLOR + "[" + ChatColor.GREEN + "ALLIANCE" + Static.SEPARATOR_COLOR + "] " +
+                        Static.SUCCESS + config.getString(senderFaction + status + "name") + " declared the alliance with " + config.getString(factionAgainst + status + "name") + "!");
                 i.playSound(i.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             }
 
-            commandSender.sendMessage(Static.SUCCESS + "The war was declared!");
-            ArchitectsLand.LOGGER.info("Faction " + strings[1] + " declared the war on " + factionAgainst + " by " + ((Player) commandSender).getDisplayName());
+            commandSender.sendMessage(Static.SUCCESS + "The alliance was declared!");
+            ArchitectsLand.LOGGER.info("Faction " + strings[1] + " declared the alliance with " + factionAgainst + " by " + ((Player) commandSender).getDisplayName());
         }
         return true;
     }

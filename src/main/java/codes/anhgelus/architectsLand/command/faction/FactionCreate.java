@@ -64,6 +64,8 @@ public class FactionCreate implements SubCommandBase {
             config.set(key + status + ".name", strings[1]);
             config.set(key + status + ".color", "white");
             config.set(key + status + ".prefix-color", "white");
+            config.set(key + status + ".war", "");
+            config.set(key + status + ".alliance", "");
 
             // Set every args in players.yml
             playerConfig.set(playerUUID + ".faction", key);

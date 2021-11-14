@@ -34,7 +34,7 @@ public class ArchitectsLand extends JavaPlugin {
 
         //command
         getCommand("f").setExecutor(new FactionCommand(this));
-        getCommand("broadcast").setExecutor(new BroadcastCommand());
+        getCommand("broadcast").setExecutor(new BroadcastCommand(this));
         getCommand("announcement").setExecutor(new AnnouncementCommand());
 
         //tabCompleter
