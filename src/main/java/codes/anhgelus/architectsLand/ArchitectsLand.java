@@ -3,6 +3,7 @@ package main.java.codes.anhgelus.architectsLand;
 import main.java.codes.anhgelus.architectsLand.command.AnnouncementCommand;
 import main.java.codes.anhgelus.architectsLand.command.BroadcastCommand;
 import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
+import main.java.codes.anhgelus.architectsLand.command.HomeCommand;
 import main.java.codes.anhgelus.architectsLand.event.PlayerJoinSetList;
 import main.java.codes.anhgelus.architectsLand.tabCompleter.AnnouncementCompleter;
 import main.java.codes.anhgelus.architectsLand.tabCompleter.BroadcastCompleter;
@@ -38,6 +39,8 @@ public class ArchitectsLand extends JavaPlugin {
         getCommand("f").setExecutor(new FactionCommand(this));
         getCommand("broadcast").setExecutor(new BroadcastCommand(this));
         getCommand("announcement").setExecutor(new AnnouncementCommand());
+        getCommand("home").setExecutor(new HomeCommand(this));
+        getCommand("sethome").setExecutor(new HomeCommand(this));
 
         //tabCompleter
         getCommand("f").setTabCompleter(new FactionCompleter(this));
