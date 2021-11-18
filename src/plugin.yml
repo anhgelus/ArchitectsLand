@@ -1,11 +1,11 @@
 main: main.java.codes.anhgelus.architectsLand.ArchitectsLand
 name: ArchitectsLand
-version: 0.5.7-beta.7
+version: 0.6.0-beta.5
 author: Anhgelus
 depend: [DiscordSRV]
 commands:
   f:
-    description: Faction base command
+    description: Faction base command (use /f for more informations)
     usage: Command error
   broadcast:
     description: Broadcast to every players
@@ -17,3 +17,9 @@ commands:
     usage: Command error
     aliases:
       - ann
+  home:
+    description: Teleport to the player's home
+    usage: Command error
+  sethome:
+    description: Set the player's home
+    usage: Command error

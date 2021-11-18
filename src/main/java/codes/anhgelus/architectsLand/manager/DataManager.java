@@ -1,6 +1,5 @@
 package main.java.codes.anhgelus.architectsLand.manager;
 
-import main.java.codes.anhgelus.architectsLand.exception.FileNotFound;
 import main.java.codes.anhgelus.architectsLand.exception.FileNotSupported;
 import org.bukkit.configuration.file.YamlConfiguration;
 
