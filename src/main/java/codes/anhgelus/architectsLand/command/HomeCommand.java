@@ -31,8 +31,14 @@ public class HomeCommand implements CommandExecutor {
 
             if (s.equals("home")) {
                 final Location home = homeManager.getHome(String.valueOf(player.getUniqueId()));
-                player.teleport(home);
-                player.sendMessage(Static.SUCCESS + "You've teleported to your home!");
+
+                if (home != null) {
+                    player.teleport(home);
+                    player.sendMessage(Static.SUCCESS + "You've teleported to your home!");
+                    return true;
+                }
+
+                player.sendMessage(Static.ERROR + "You don't have set a home yet!");
             }
 
             if (s.equals("sethome")) {

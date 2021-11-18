@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.util.Objects;
-import java.util.UUID;
 
 public class HomeManager {
     private final YamlConfiguration config;
