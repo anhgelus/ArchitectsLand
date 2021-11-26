@@ -43,8 +43,8 @@ public class FactionCreate implements SubCommandBase {
             final String status = ".status";
 
             //Check if the faction exist
-            if (!FactionManager.doubleFaction(config, strings[1])) {
-                commandSender.sendMessage(Static.ERROR + "This faction doesn't exist!");
+            if (FactionManager.doubleFaction(config, strings[1])) {
+                commandSender.sendMessage(Static.ERROR + "This faction already exist!");
                 return true;
             }
 

@@ -3,9 +3,11 @@ package main.java.codes.anhgelus.architectsLand.manager;
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
 import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.lang.reflect.Array;
+import java.util.Objects;
 
 public class FactionManager {
     private final ArchitectsLand main;
@@ -13,6 +15,8 @@ public class FactionManager {
     public FactionManager(ArchitectsLand main) {
         this.main = main;
     }
+
+    public static final String LIST_KEY = "factions";
 
     /**
      * Get every factions created
@@ -23,7 +27,7 @@ public class FactionManager {
         File listFile = FileManager.getListData(this.main);
         final YamlConfiguration listConfig = YamlConfiguration.loadConfiguration(listFile);
 
-        final String factionsString = listConfig.getString("factions");
+        final String factionsString = listConfig.getString(LIST_KEY);
 
         if (factionsString == null) {
             return new String[]{"NoFactionWasCreated"};
@@ -45,5 +49,36 @@ public class FactionManager {
             toReturn = true;
         }
         return toReturn;
+    }
+
+    /**
+     *
+     * @param player
+     * @param faction
+     * @param main
+     * @return
+     */
+    public static boolean isFactionOwner(Player player, String faction, ArchitectsLand main) {
+        final YamlConfiguration factions = YamlConfiguration.loadConfiguration(FileManager.getFactionsData(main));
+
+        final String owner = factions.getString(faction + ".owner");
+
+        if (Objects.equals(owner, player.getDisplayName())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean isInFaction(Player player, ArchitectsLand main) {
+        final YamlConfiguration list = YamlConfiguration.loadConfiguration(FileManager.getListData(main));
+
+        final String faction = list.getString(player.getUniqueId() + ".faction");
+
+        if (faction != null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
