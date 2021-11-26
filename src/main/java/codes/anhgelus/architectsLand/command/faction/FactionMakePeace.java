@@ -54,7 +54,7 @@ public class FactionMakePeace implements SubCommandBase {
             }
 
             //Check if he is the faction's owner
-            if (!Objects.equals(senderUUID, config.getString(senderFaction + ".owner"))) {
+            if (!FactionManager.isFactionOwner((Player) commandSender, senderFaction, main)) {
                 commandSender.sendMessage(Static.ERROR + "You're not the owner!");
                 return true;
             }

@@ -47,7 +47,7 @@ public class FactionModify implements SubCommandBase {
             String modified = strings[3];
 
             // Check if the player is the owner
-            if (!Objects.equals(playerUUID, config.getString(key + ".owner"))) {
+            if (!FactionManager.isFactionOwner((Player) commandSender, key, main)) {
                 commandSender.sendMessage(Static.ERROR + "You're not the owner!");
                 return true;
             }

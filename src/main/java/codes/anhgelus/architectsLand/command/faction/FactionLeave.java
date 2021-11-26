@@ -41,7 +41,7 @@ public class FactionLeave implements SubCommandBase {
 
             for (String i : players) {
                 // Check if the player is the owner or not
-                if (Objects.equals(config.getString(faction + ".owner"), i)) {
+                if (!FactionManager.isFactionOwner((Player) commandSender, faction, main)) {
                     commandSender.sendMessage(Static.ERROR + "If you want to leave your faction, use /f delete <faction>");
                     return true;
                 }
