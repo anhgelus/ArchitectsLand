@@ -1,23 +1,18 @@
 package main.java.codes.anhgelus.architectsLand.command.faction;
 
+import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
 import main.java.codes.anhgelus.architectsLand.util.Static;
 import main.java.codes.anhgelus.architectsLand.util.SubCommandBase;
 import org.bukkit.command.CommandSender;
 
 public class FactionHelp implements SubCommandBase {
 
-    private final CommandSender commandSender;
-
-    public FactionHelp (CommandSender commandSender) {
-        this.commandSender = commandSender;
-    }
-
     /**
      * Execute the command
      *
      * @return true
      */
-    public boolean command() {
+    public boolean command(String[] strings, CommandSender commandSender, ArchitectsLand main) {
         commandSender.sendMessage(Static.SUCCESS + "Help faction command:\n\n" +
                 Static.SEPARATOR + Static.EOL +
                 Static.SUCCESS + "/f create <faction> - Create a faction " + Static.EXAMPLE + "(you need " + FactionCreate.PERMISSION + " permission to create it" + Static.EOL +

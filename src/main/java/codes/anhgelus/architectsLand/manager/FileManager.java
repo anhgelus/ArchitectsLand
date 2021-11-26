@@ -28,4 +28,11 @@ public class FileManager {
     public static File getListData(ArchitectsLand main) {
         return new File(main.getDataFolder(), "data/lists.yml");
     }
+
+    /**
+     * Get the economy's data (economy.yml)
+     *
+     * @return Economy data file
+     */
+    public static File getEcoData(ArchitectsLand main) { return new File(main.getDataFolder(), "data/economy.yml"); }
 }

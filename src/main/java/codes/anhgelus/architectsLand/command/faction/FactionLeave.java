@@ -16,29 +16,18 @@ import java.io.File;
 import java.util.Objects;
 
 public class FactionLeave implements SubCommandBase {
-    private final String[] strings;
-    private final CommandSender commandSender;
-    private final ArchitectsLand main;
 
     public static final String PERMISSION = FactionCommand.PERMISSION_FACTION + "leave";
-
-    public FactionLeave (String[] strings, CommandSender commandSender, ArchitectsLand main) {
-        this.strings = strings;
-        this.commandSender = commandSender;
-        this.main = main;
-    }
 
     /**
      * Execute the command
      *
      * @return true
      */
-    public boolean command() {
-        /*
-        * BUG = N'arrive pas à récupérer les joueurs (null)
-         */
+    @Override
+    public boolean command(String[] strings, CommandSender commandSender, ArchitectsLand main) {
         if (strings.length > 1) {
-            final File basesFile = FileManager.getFactionsData(this.main);
+            final File basesFile = FileManager.getFactionsData(main);
             final YamlConfiguration config = YamlConfiguration.loadConfiguration(basesFile);
             final String faction = strings[1].toLowerCase();
 

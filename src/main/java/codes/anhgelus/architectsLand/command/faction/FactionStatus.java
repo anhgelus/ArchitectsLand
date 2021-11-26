@@ -12,26 +12,18 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 
 public class FactionStatus implements SubCommandBase {
-    private final String[] strings;
-    private final CommandSender commandSender;
-    private final ArchitectsLand main;
 
     public static final String PERMISSION = FactionCommand.PERMISSION_FACTION + "modify";
-
-    public FactionStatus (String[] strings, CommandSender commandSender, ArchitectsLand main) {
-        this.strings = strings;
-        this.commandSender = commandSender;
-        this.main = main;
-    }
 
     /**
      * Execute the command
      *
      * @return true
      */
-    public boolean command() {
+    @Override
+    public boolean command(String[] strings, CommandSender commandSender, ArchitectsLand main) {
         if (strings.length > 1) {
-            final File basesFile = FileManager.getFactionsData(this.main);
+            final File basesFile = FileManager.getFactionsData(main);
             final YamlConfiguration config = YamlConfiguration.loadConfiguration(basesFile);
 
             final String key = strings[1].toLowerCase();

@@ -45,47 +45,47 @@ public class FactionCommand implements CommandExecutor {
             // Check if the command has args
             if (strings.length != 0) {
                 if (PermissionManager.permissionChecker(strings[0], commandSender, new String[]{"create"}, FactionCreate.PERMISSION)) {
-                    final FactionCreate fCreate = new FactionCreate(strings, commandSender, main);
-                    return fCreate.command();
+                    final FactionCreate fCreate = new FactionCreate();
+                    return fCreate.command(strings, commandSender, main);
                 } else if (PermissionManager.permissionChecker(strings[0], commandSender, new String[]{"join"}, FactionJoin.PERMISSION)) {
-                    final FactionJoin fJoin = new FactionJoin(strings, commandSender, main);
-                    return fJoin.command();
+                    final FactionJoin fJoin = new FactionJoin();
+                    return fJoin.command(strings, commandSender, main);
                 } else if (PermissionManager.permissionChecker(strings[0], commandSender, new String[]{"leave"}, FactionLeave.PERMISSION)) {
-                    final FactionLeave fLeave = new FactionLeave(strings, commandSender, main);
-                    return fLeave.command();
+                    final FactionLeave fLeave = new FactionLeave();
+                    return fLeave.command(strings, commandSender, main);
                 } else if (PermissionManager.permissionChecker(strings[0], commandSender, new String[]{"delete"}, FactionDelete.PERMISSION)) {
-                    final FactionDelete fDelete = new FactionDelete(strings, commandSender, main);
-                    return fDelete.command();
+                    final FactionDelete fDelete = new FactionDelete();
+                    return fDelete.command(strings, commandSender, main);
                 } else if (PermissionManager.permissionChecker(strings[0], commandSender, new String[]{"modify"}, FactionModify.PERMISSION)) {
-                    final FactionModify fModify = new FactionModify(strings, commandSender, main);
-                    return fModify.command();
+                    final FactionModify fModify = new FactionModify();
+                    return fModify.command(strings, commandSender, main);
                 } else if (PermissionManager.permissionChecker(strings[0], commandSender, new String[]{"status"}, FactionStatus.PERMISSION)) {
-                    final FactionStatus fStatus = new FactionStatus(strings, commandSender, main);
-                    return fStatus.command();
+                    final FactionStatus fStatus = new FactionStatus();
+                    return fStatus.command(strings, commandSender, main);
                 } else if (PermissionManager.permissionChecker(strings[0], commandSender, new String[]{"invite"}, FactionInvite.PERMISSION)) {
-                    final FactionInvite fInvite = new FactionInvite(strings, commandSender, main);
-                    return fInvite.command();
+                    final FactionInvite fInvite = new FactionInvite();
+                    return fInvite.command(strings, commandSender, main);
                 } else if (PermissionManager.permissionChecker(strings[0], commandSender, new String[]{"war"}, FactionWar.PERMISSION)) {
-                    final FactionWar fWar = new FactionWar(strings, commandSender, main);
-                    return fWar.command();
+                    final FactionWar fWar = new FactionWar();
+                    return fWar.command(strings, commandSender, main);
                 } else if (PermissionManager.permissionChecker(strings[0], commandSender, new String[]{"alliance"}, FactionAlliance.PERMISSION)) {
-                    final FactionAlliance fAlliance = new FactionAlliance(strings, commandSender, main);
-                    return fAlliance.command();
+                    final FactionAlliance fAlliance = new FactionAlliance();
+                    return fAlliance.command(strings, commandSender, main);
                 } else if (PermissionManager.permissionChecker(strings[0], commandSender, new String[]{"ba", "break", "breakalliance"}, FactionBreakAlliance.PERMISSION)) {
-                    final FactionBreakAlliance fBreak = new FactionBreakAlliance(strings, commandSender, main);
-                    return fBreak.command();
+                    final FactionBreakAlliance fBreak = new FactionBreakAlliance();
+                    return fBreak.command(strings, commandSender, main);
                 } else if (PermissionManager.permissionChecker(strings[0], commandSender, new String[]{"peace", "makepeace"}, FactionMakePeace.PERMISSION)) {
-                    final FactionMakePeace fPeace = new FactionMakePeace(strings, commandSender, main);
-                    return fPeace.command();
+                    final FactionMakePeace fPeace = new FactionMakePeace();
+                    return fPeace.command(strings, commandSender, main);
                 } else if (PermissionManager.permissionChecker(strings[0], commandSender, new String[]{"list"}, FactionList.PERMISSION)) {
-                    final FactionList fList = new FactionList(strings, commandSender, main);
-                    return fList.command();
+                    final FactionList fList = new FactionList();
+                    return fList.command(strings, commandSender, main);
                 }
                 commandSender.sendMessage(Static.ERROR + "You don't have the permission to do this!");
                 return true;
             }  else {
-                FactionHelp fHelp = new FactionHelp(commandSender);
-                return fHelp.command();
+                FactionHelp fHelp = new FactionHelp();
+                return fHelp.command(strings, commandSender, main);
             }
         }
         return false;

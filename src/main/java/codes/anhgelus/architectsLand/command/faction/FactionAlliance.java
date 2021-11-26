@@ -8,30 +8,17 @@ import main.java.codes.anhgelus.architectsLand.manager.FileManager;
 import main.java.codes.anhgelus.architectsLand.util.Static;
 import main.java.codes.anhgelus.architectsLand.util.SubCommandBase;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 public class FactionAlliance implements SubCommandBase {
-    private final String[] strings;
-    private final CommandSender commandSender;
-    private final ArchitectsLand main;
 
-    public static final String PERMISSION = FactionCommand.PERMISSION_FACTION + "alliance";
-
-    public FactionAlliance (String[] strings, CommandSender commandSender, ArchitectsLand main) {
-        this.strings = strings;
-        this.commandSender = commandSender;
-        this.main = main;
-    }
+    public static String PERMISSION = FactionCommand.PERMISSION_FACTION + "alliance";
 
     /**
      * Execute the command
@@ -39,12 +26,12 @@ public class FactionAlliance implements SubCommandBase {
      * @return true
      */
     @Override
-    public boolean command() {
+    public boolean command(String[] strings, CommandSender commandSender, ArchitectsLand main) {
         if (strings.length > 1) {
-            final File basesFile = FileManager.getFactionsData(this.main);
+            final File basesFile = FileManager.getFactionsData(main);
             final YamlConfiguration config = YamlConfiguration.loadConfiguration(basesFile);
 
-            File playersFile = FileManager.getPlayersData(this.main);
+            File playersFile = FileManager.getPlayersData(main);
             final YamlConfiguration playerConfig = YamlConfiguration.loadConfiguration(playersFile);
 
             final String senderUUID = String.valueOf(((Player) commandSender).getUniqueId());

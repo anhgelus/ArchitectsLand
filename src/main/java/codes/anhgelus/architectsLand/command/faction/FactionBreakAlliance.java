@@ -21,17 +21,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class FactionBreakAlliance implements SubCommandBase {
-    private final String[] strings;
-    private final CommandSender commandSender;
-    private final ArchitectsLand main;
 
     public static final String PERMISSION = FactionCommand.PERMISSION_FACTION + "breakalliance";
-
-    public FactionBreakAlliance (String[] strings, CommandSender commandSender, ArchitectsLand main) {
-        this.strings = strings;
-        this.commandSender = commandSender;
-        this.main = main;
-    }
 
     /**
      * Execute the command
@@ -39,12 +30,12 @@ public class FactionBreakAlliance implements SubCommandBase {
      * @return true
      */
     @Override
-    public boolean command() {
+    public boolean command(String[] strings, CommandSender commandSender, ArchitectsLand main) {
         if (strings.length > 1) {
-            final File basesFile = FileManager.getFactionsData(this.main);
+            final File basesFile = FileManager.getFactionsData(main);
             final YamlConfiguration config = YamlConfiguration.loadConfiguration(basesFile);
 
-            File playersFile = FileManager.getPlayersData(this.main);
+            File playersFile = FileManager.getPlayersData(main);
             final YamlConfiguration playerConfig = YamlConfiguration.loadConfiguration(playersFile);
 
             final String senderUUID = String.valueOf(((Player) commandSender).getUniqueId());

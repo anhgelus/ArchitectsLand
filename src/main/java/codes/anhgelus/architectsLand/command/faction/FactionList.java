@@ -8,20 +8,11 @@ import main.java.codes.anhgelus.architectsLand.util.SubCommandBase;
 import org.bukkit.command.CommandSender;
 
 public class FactionList implements SubCommandBase {
-    private final String[] strings;
-    private final CommandSender commandSender;
-    private final ArchitectsLand main;
 
     public static final String PERMISSION = FactionCommand.PERMISSION_FACTION + "list";
 
-    public FactionList (String[] strings, CommandSender commandSender, ArchitectsLand main) {
-        this.strings = strings;
-        this.commandSender = commandSender;
-        this.main = main;
-    }
-
     @Override
-    public boolean command() {
+    public boolean command(String[] strings, CommandSender commandSender, ArchitectsLand main) {
         if (strings.length == 1) {
             final FactionManager fManager = new FactionManager(main);
             final String[] factions = fManager.getFactions();

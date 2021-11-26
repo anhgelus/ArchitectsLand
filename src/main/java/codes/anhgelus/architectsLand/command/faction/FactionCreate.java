@@ -17,17 +17,8 @@ import org.bukkit.entity.Player;
 import java.io.File;
 
 public class FactionCreate implements SubCommandBase {
-    private final String[] strings;
-    private final CommandSender commandSender;
-    private final ArchitectsLand main;
 
     public static final String PERMISSION = FactionCommand.PERMISSION_FACTION + "create";
-
-    public FactionCreate (String[] strings, CommandSender commandSender, ArchitectsLand main) {
-        this.strings = strings;
-        this.commandSender = commandSender;
-        this.main = main;
-    }
 
     /**
      * Execute the command
@@ -35,15 +26,15 @@ public class FactionCreate implements SubCommandBase {
      * @return true
      */
     @Override
-    public boolean command() {
+    public boolean command(String[] strings, CommandSender commandSender, ArchitectsLand main) {
         if (strings.length > 1) {
-            final File basesFile = FileManager.getFactionsData(this.main);
+            final File basesFile = FileManager.getFactionsData(main);
             final YamlConfiguration config = YamlConfiguration.loadConfiguration(basesFile);
 
-            File playersFile = FileManager.getPlayersData(this.main);
+            File playersFile = FileManager.getPlayersData(main);
             final YamlConfiguration playerConfig = YamlConfiguration.loadConfiguration(playersFile);
 
-            File listFile = FileManager.getListData(this.main);
+            File listFile = FileManager.getListData(main);
             final YamlConfiguration listConfig = YamlConfiguration.loadConfiguration(listFile);
 
             final String playerUUID = String.valueOf(((Player) commandSender).getUniqueId());

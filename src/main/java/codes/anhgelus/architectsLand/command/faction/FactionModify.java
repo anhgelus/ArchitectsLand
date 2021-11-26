@@ -18,27 +18,19 @@ import java.util.List;
 import java.util.Objects;
 
 public class FactionModify implements SubCommandBase {
-    private final String[] strings;
-    private final CommandSender commandSender;
-    private final ArchitectsLand main;
 
     public static final String PERMISSION = FactionCommand.PERMISSION_FACTION + "modify";
     public static final List<String> MODIFY_TYPE = Arrays.asList("prefix", "name", "color", "description", "prefix-color");
-
-    public FactionModify (String[] strings, CommandSender commandSender, ArchitectsLand main) {
-        this.strings = strings;
-        this.commandSender = commandSender;
-        this.main = main;
-    }
 
     /**
      * Execute the command
      *
      * @return true
      */
-    public boolean command() {
+    @Override
+    public boolean command(String[] strings, CommandSender commandSender, ArchitectsLand main) {
         if (strings.length == 4 || (strings.length >= 4 && Objects.equals(strings[2], "description"))) {
-            final File basesFile = FileManager.getFactionsData(this.main);
+            final File basesFile = FileManager.getFactionsData(main);
             final YamlConfiguration config = YamlConfiguration.loadConfiguration(basesFile);
 
             final String playerUUID = String.valueOf(((Player) commandSender).getUniqueId());
