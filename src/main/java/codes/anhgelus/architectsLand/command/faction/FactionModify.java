@@ -2,6 +2,8 @@ package main.java.codes.anhgelus.architectsLand.command.faction;
 
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
 import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
+import main.java.codes.anhgelus.architectsLand.manager.FactionManager;
+import main.java.codes.anhgelus.architectsLand.manager.FileManager;
 import main.java.codes.anhgelus.architectsLand.util.Static;
 import main.java.codes.anhgelus.architectsLand.util.SubCommandBase;
 import org.bukkit.Bukkit;
@@ -36,7 +38,7 @@ public class FactionModify implements SubCommandBase {
      */
     public boolean command() {
         if (strings.length == 4 || (strings.length >= 4 && Objects.equals(strings[2], "description"))) {
-            File basesFile = new FactionCommand(main).getFactionsData();
+            final File basesFile = FileManager.getFactionsData(this.main);
             final YamlConfiguration config = YamlConfiguration.loadConfiguration(basesFile);
 
             final String playerUUID = String.valueOf(((Player) commandSender).getUniqueId());
@@ -45,7 +47,7 @@ public class FactionModify implements SubCommandBase {
             final String status = ".status.";
 
             // Check if the faction exist
-            if (!FactionCommand.doubleFaction(config, key)) {
+            if (!FactionManager.doubleFaction(config, key)) {
                 commandSender.sendMessage(Static.ERROR + "This faction doesn't exist!");
                 return true;
             }

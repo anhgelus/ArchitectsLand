@@ -3,6 +3,8 @@ package main.java.codes.anhgelus.architectsLand.command.faction;
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
 import main.java.codes.anhgelus.architectsLand.command.AnnouncementCommand;
 import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
+import main.java.codes.anhgelus.architectsLand.manager.FactionManager;
+import main.java.codes.anhgelus.architectsLand.manager.FileManager;
 import main.java.codes.anhgelus.architectsLand.util.Static;
 import main.java.codes.anhgelus.architectsLand.util.SubCommandBase;
 import org.bukkit.Bukkit;
@@ -39,16 +41,16 @@ public class FactionBreakAlliance implements SubCommandBase {
     @Override
     public boolean command() {
         if (strings.length > 1) {
-            final File basesFile = new FactionCommand(main).getFactionsData();
+            final File basesFile = FileManager.getFactionsData(this.main);
             final YamlConfiguration config = YamlConfiguration.loadConfiguration(basesFile);
 
-            File playersFile = new FactionCommand(main).getPlayersData();
+            File playersFile = FileManager.getPlayersData(this.main);
             final YamlConfiguration playerConfig = YamlConfiguration.loadConfiguration(playersFile);
 
             final String senderUUID = String.valueOf(((Player) commandSender).getUniqueId());
 
             //Check if the faction exist
-            if (!FactionCommand.doubleFaction(config, strings[1])) {
+            if (!FactionManager.doubleFaction(config, strings[1])) {
                 commandSender.sendMessage(Static.ERROR + "This faction doesn't exist!");
                 return true;
             }

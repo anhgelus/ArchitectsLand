@@ -1,6 +1,7 @@
 package main.java.codes.anhgelus.architectsLand.command;
 
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
+import main.java.codes.anhgelus.architectsLand.manager.FileManager;
 import main.java.codes.anhgelus.architectsLand.util.Static;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -36,10 +37,10 @@ public class BroadcastCommand implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         // Check if the commandSend is a player or not
         if (s.equals("broadcast") || s.equals("bc") && commandSender instanceof Player) {
-            final File basesFile = new FactionCommand(main).getFactionsData();
+            final File basesFile = FileManager.getFactionsData(this.main);
             final YamlConfiguration config = YamlConfiguration.loadConfiguration(basesFile);
 
-            File playersFile = new FactionCommand(main).getPlayersData();
+            File playersFile = FileManager.getPlayersData(this.main);
             final YamlConfiguration playerConfig = YamlConfiguration.loadConfiguration(playersFile);
 
             final String senderUUID = String.valueOf(((Player) commandSender).getUniqueId());

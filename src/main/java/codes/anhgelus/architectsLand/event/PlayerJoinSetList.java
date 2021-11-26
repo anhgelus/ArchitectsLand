@@ -2,6 +2,7 @@ package main.java.codes.anhgelus.architectsLand.event;
 
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
 import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
+import main.java.codes.anhgelus.architectsLand.manager.FileManager;
 import main.java.codes.anhgelus.architectsLand.manager.HomeManager;
 import main.java.codes.anhgelus.architectsLand.util.Static;
 import org.bukkit.Bukkit;
@@ -24,10 +25,10 @@ public class PlayerJoinSetList implements Listener {
 
     @EventHandler (priority = EventPriority.NORMAL)
     public void onPlayerJoin(PlayerJoinEvent e) {
-        File listFile = new FactionCommand(main).getListData();
+        File listFile = FileManager.getListData(this.main);
         final YamlConfiguration listConfig = YamlConfiguration.loadConfiguration(listFile);
 
-        File playersFile = new FactionCommand(main).getPlayersData();
+        File playersFile = FileManager.getPlayersData(this.main);
         final YamlConfiguration playersConfig = YamlConfiguration.loadConfiguration(playersFile);
 
         final Player p = e.getPlayer();

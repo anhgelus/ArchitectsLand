@@ -1,6 +1,7 @@
 package main.java.codes.anhgelus.architectsLand.command;
 
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
+import main.java.codes.anhgelus.architectsLand.manager.FileManager;
 import main.java.codes.anhgelus.architectsLand.manager.HomeManager;
 import main.java.codes.anhgelus.architectsLand.util.Static;
 import org.bukkit.Location;
@@ -25,7 +26,7 @@ public class HomeCommand implements CommandExecutor {
 
             final Player player = (Player) commandSender;
 
-            File basesFile = new FactionCommand(main).getPlayersData();
+            File basesFile = FileManager.getPlayersData(this.main);
             final YamlConfiguration config = YamlConfiguration.loadConfiguration(basesFile);
             final HomeManager homeManager = new HomeManager(config, player);
 

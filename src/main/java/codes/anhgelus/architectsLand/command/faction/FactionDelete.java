@@ -3,6 +3,8 @@ package main.java.codes.anhgelus.architectsLand.command.faction;
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
 import main.java.codes.anhgelus.architectsLand.command.AnnouncementCommand;
 import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
+import main.java.codes.anhgelus.architectsLand.manager.FactionManager;
+import main.java.codes.anhgelus.architectsLand.manager.FileManager;
 import main.java.codes.anhgelus.architectsLand.util.Static;
 import main.java.codes.anhgelus.architectsLand.util.SubCommandBase;
 import org.bukkit.Bukkit;
@@ -34,13 +36,13 @@ public class FactionDelete implements SubCommandBase {
      */
     public boolean command() {
         if (strings.length > 1) {
-            File basesFile = new FactionCommand(main).getFactionsData();
+            final File basesFile = FileManager.getFactionsData(this.main);
             final YamlConfiguration config = YamlConfiguration.loadConfiguration(basesFile);
 
-            File playersFile = new FactionCommand(main).getPlayersData();
+            File playersFile = FileManager.getPlayersData(this.main);
             final YamlConfiguration playerConfig = YamlConfiguration.loadConfiguration(playersFile);
 
-            File listFile = new FactionCommand(main).getListData();
+            File listFile = FileManager.getListData(this.main);
             final YamlConfiguration listConfig = YamlConfiguration.loadConfiguration(listFile);
 
             final String playerUUID = String.valueOf(((Player) commandSender).getUniqueId());
@@ -48,7 +50,7 @@ public class FactionDelete implements SubCommandBase {
             final String key = strings[1].toLowerCase();
 
             // Check if the faction exist
-            if (!FactionCommand.doubleFaction(config, key)) {
+            if (!FactionManager.doubleFaction(config, key)) {
                 commandSender.sendMessage(Static.ERROR + "This faction doesn't exist!");
                 return true;
             }

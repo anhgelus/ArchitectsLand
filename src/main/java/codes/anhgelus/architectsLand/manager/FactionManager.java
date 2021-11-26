@@ -20,7 +20,7 @@ public class FactionManager {
      * @return String[] of factions
      */
     public String[] getFactions() {
-        File listFile = new FactionCommand(main).getListData();
+        File listFile = FileManager.getListData(this.main);
         final YamlConfiguration listConfig = YamlConfiguration.loadConfiguration(listFile);
 
         final String factionsString = listConfig.getString("factions");
@@ -30,5 +30,20 @@ public class FactionManager {
         } else {
             return factionsString.split(FactionCommand.UUID_SEPARATOR);
         }
+    }
+
+    /**
+     * Detect if the faction exist or not
+     *
+     * @param config Config file (YamlConfiguration)
+     * @param faction Detect this faction
+     * @return true -> faction exist | false -> faction doesn't exist
+     */
+    public static boolean doubleFaction(YamlConfiguration config, String faction) {
+        boolean toReturn = false;
+        if (config.getString(faction.toLowerCase() + FactionCommand.FACTION_CHECKER_TARGET) != null) {
+            toReturn = true;
+        }
+        return toReturn;
     }
 }

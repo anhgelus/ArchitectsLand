@@ -2,6 +2,7 @@ package main.java.codes.anhgelus.architectsLand.command.faction;
 
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
 import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
+import main.java.codes.anhgelus.architectsLand.manager.FileManager;
 import main.java.codes.anhgelus.architectsLand.util.Static;
 import main.java.codes.anhgelus.architectsLand.util.SubCommandBase;
 import org.bukkit.Bukkit;
@@ -33,11 +34,12 @@ public class FactionInvite implements SubCommandBase {
      */
     public boolean command() {
         if (strings.length > 1) {
-            final File basesFile = new FactionCommand(main).getFactionsData();
+            final File basesFile = FileManager.getFactionsData(this.main);
             final YamlConfiguration config = YamlConfiguration.loadConfiguration(basesFile);
 
-            final File playersFile = new FactionCommand(main).getPlayersData();
-            final YamlConfiguration playersConfig = YamlConfiguration.loadConfiguration(playersFile);
+            File playersFile = FileManager.getPlayersData(this.main);
+            final YamlConfiguration playerConfig = YamlConfiguration.loadConfiguration(playersFile);
+
             final Server server = Bukkit.getServer();
 
             final Player invitedPlayer = server.getPlayer(strings[1]);
@@ -50,7 +52,7 @@ public class FactionInvite implements SubCommandBase {
 
             final String invitedPlayerUUID = String.valueOf(invitedPlayer.getUniqueId());
 
-            final String faction = playersConfig.getString(((Player) commandSender).getUniqueId() + ".faction");
+            final String faction = playerConfig.getString(((Player) commandSender).getUniqueId() + ".faction");
 
             if (faction == null) {
                 commandSender.sendMessage(Static.ERROR + "You're not in a faction");

@@ -3,6 +3,8 @@ package main.java.codes.anhgelus.architectsLand.command.faction;
 import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
 import main.java.codes.anhgelus.architectsLand.command.AnnouncementCommand;
 import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
+import main.java.codes.anhgelus.architectsLand.manager.FactionManager;
+import main.java.codes.anhgelus.architectsLand.manager.FileManager;
 import main.java.codes.anhgelus.architectsLand.util.Static;
 import main.java.codes.anhgelus.architectsLand.util.SubCommandBase;
 import org.bukkit.Bukkit;
@@ -36,12 +38,12 @@ public class FactionLeave implements SubCommandBase {
         * BUG = N'arrive pas à récupérer les joueurs (null)
          */
         if (strings.length > 1) {
-            final File basesFile = new FactionCommand(main).getFactionsData();
+            final File basesFile = FileManager.getFactionsData(this.main);
             final YamlConfiguration config = YamlConfiguration.loadConfiguration(basesFile);
             final String faction = strings[1].toLowerCase();
 
             // Check if the faction exist
-            if (!FactionCommand.doubleFaction(config, strings[1])) {
+            if (!FactionManager.doubleFaction(config, strings[1])) {
                 commandSender.sendMessage(Static.ERROR + "This faction doesn't exist!");
                 return true;
             }
