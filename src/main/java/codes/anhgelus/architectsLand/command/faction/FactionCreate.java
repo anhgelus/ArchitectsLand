@@ -58,6 +58,7 @@ public class FactionCreate implements SubCommandBase {
             config.set(key + ".invitation", "");
             config.set(key + status + ".description", "No description set. Use /f modify description to set it.");
             config.set(key + status + ".prefix", prefix);
+            config.set(key + status + ".prefix-content", prefixBrut);
             config.set(key + status + ".name", strings[1]);
             config.set(key + status + ".color", "white");
             config.set(key + status + ".prefix-color", "white");

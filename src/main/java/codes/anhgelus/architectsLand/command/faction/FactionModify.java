@@ -7,6 +7,7 @@ import main.java.codes.anhgelus.architectsLand.manager.FileManager;
 import main.java.codes.anhgelus.architectsLand.util.Static;
 import main.java.codes.anhgelus.architectsLand.util.SubCommandBase;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -60,6 +61,8 @@ public class FactionModify implements SubCommandBase {
 
             ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
 
+            final String link = key + status + strings[2];
+
             switch (strings[2]) {
                 case "prefix":
 
@@ -70,6 +73,8 @@ public class FactionModify implements SubCommandBase {
 
                     Bukkit.dispatchCommand(console, "team modify " + key + " prefix " + prefixJson);
 
+                    config.set(key + status + "prefix-content", strings[3]);
+
                     break;
                 case "prefix-color":
                     // Check if the color exist
@@ -78,12 +83,13 @@ public class FactionModify implements SubCommandBase {
                          * A fix -> problème quand prefix récup
                          *          solution possible -> créer variable pour prefix à part dans yml
                          */
-                        final String prefix = config.getString(key + status + "prefix").replace("[", "").replace("]", "");
-                        final String prefixJsonColor = Static.prefixCreatorJson(prefix, strings[3]);
+                        final String prefixContent = config.getString(key + status + "prefix-content");
+                        final String prefix = ChatColor.WHITE + "[" + strings[3] + prefixContent + ChatColor.WHITE +  "]";
+                        final String prefixJsonColor = Static.prefixCreatorJson(prefixContent, strings[3]);
 
                         modified = strings[3];
 
-                        config.set(key + status + "prefix", Static.prefixCreatorYml(prefix, modified));
+                        config.set(key + status + "prefix", Static.prefixCreatorYml(prefixContent, modified));
 
                         Bukkit.dispatchCommand(console, "team modify " + key + " prefix " + prefixJsonColor);
                         commandSender.sendMessage(prefixJsonColor);
@@ -107,7 +113,6 @@ public class FactionModify implements SubCommandBase {
                     break;
             }
 
-            final String link = key + status + strings[2];
             config.set(link, modified);
 
             FactionCommand.saveFile(config, basesFile);
