@@ -4,6 +4,7 @@ import main.java.codes.anhgelus.architectsLand.ArchitectsLand;
 import main.java.codes.anhgelus.architectsLand.util.Static;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -67,6 +68,20 @@ public class AnnouncementCommand implements CommandExecutor {
             String minecraftMessage = Static.SEPARATOR_COLOR + "[" + ChatColor.GREEN + type.toUpperCase() + Static.SEPARATOR_COLOR + "] " +
                     Static.SUCCESS + discordContent;
             i.sendMessage(minecraftMessage);
+            if (type.equals("alliance")) {
+                i.playSound(i.getLocation(), Sound.BLOCK_AMETHYST_BLOCK_HIT, 15, 1);
+            } else if (type.equals("war")) {
+                i.playSound(i.getLocation(), Sound.BLOCK_ANVIL_LAND, 2, 1);
+            } else if (type.equals("end of war")) {
+                i.playSound(i.getLocation(), Sound.BLOCK_ANVIL_LAND, 2, 1);
+            } else if (type.equals("end of alliance")) {
+                i.playSound(i.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_DEPLETE, 5, 1);
+            }  else if (type.equals("faction")) {
+                i.playSound(i.getLocation(), Sound.BLOCK_RESPAWN_ANCHOR_CHARGE, 5, 1);
+            }
+            else {
+                i.playSound(i.getLocation(), Sound.BLOCK_BELL_USE, 10, 1);
+            }
         }
     }
 }

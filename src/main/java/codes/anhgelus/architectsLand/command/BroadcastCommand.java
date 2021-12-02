@@ -70,7 +70,7 @@ public class BroadcastCommand implements CommandExecutor {
             // Check if the command has args
             if (strings.length != 0) {
                 AnnouncementCommand.announcement("broadcast",
-                        Static.arrayToString(strings) + "*- par " + player.getDisplayName() + "*",
+                        Static.arrayToString(strings) + " *- by " + player.getDisplayName() + "*",
                         Bukkit.getOnlinePlayers().toArray(new Player[0]));
             } else {
                 commandSender.sendMessage(Static.ERROR + "You need to specify the message to send it!");

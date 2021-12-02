@@ -16,7 +16,7 @@ public class FileManager {
     /**
      * Get the players' data (player.yml)
      *
-     * @return Factions data file
+     * @return Players data file
      */
     public static File getPlayersData(ArchitectsLand main) { return new File(main.getDataFolder(), "data/players.yml"); }
 
@@ -28,11 +28,4 @@ public class FileManager {
     public static File getListData(ArchitectsLand main) {
         return new File(main.getDataFolder(), "data/lists.yml");
     }
-
-    /**
-     * Get the economy's data (economy.yml)
-     *
-     * @return Economy data file
-     */
-    public static File getEcoData(ArchitectsLand main) { return new File(main.getDataFolder(), "data/economy.yml"); }
 }

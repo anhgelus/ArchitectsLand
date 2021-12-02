@@ -37,7 +37,7 @@ public class FactionCompleter implements TabCompleter {
                 return FactionCommand.COMMANDS;
             /* all /f */
             } else if (Objects.equals(strings[0], "create") && strings.length == 2) {
-                return faction_indication;
+                return List.of("<name>");
             } else if (Objects.equals(strings[0], "delete") && strings.length == 2) {
                 return faction_indication;
             } else if (Objects.equals(strings[0], "join") && strings.length == 2) {

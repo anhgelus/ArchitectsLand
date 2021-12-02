@@ -74,15 +74,19 @@ public class FactionModify implements SubCommandBase {
                 case "prefix-color":
                     // Check if the color exist
                     if (Static.colorExist(strings[3])) {
-
+                        /*
+                         * A fix -> problème quand prefix récup
+                         *          solution possible -> créer variable pour prefix à part dans yml
+                         */
                         final String prefix = config.getString(key + status + "prefix").replace("[", "").replace("]", "");
-                        final String prefixTeam = Static.prefixCreatorJson(prefix, strings[3]);
+                        final String prefixJsonColor = Static.prefixCreatorJson(prefix, strings[3]);
 
                         modified = strings[3];
 
-                        config.set(key + status + "prefix", Static.prefixCreatorYml(prefix, prefixTeam));
+                        config.set(key + status + "prefix", Static.prefixCreatorYml(prefix, modified));
 
-                        Bukkit.dispatchCommand(console, "team modify " + key + " prefix " + prefixTeam);
+                        Bukkit.dispatchCommand(console, "team modify " + key + " prefix " + prefixJsonColor);
+                        commandSender.sendMessage(prefixJsonColor);
 
                     } else {
                         commandSender.sendMessage(Static.ERROR + "This color doesn't exist!");
