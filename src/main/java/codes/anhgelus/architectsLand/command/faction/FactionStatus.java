@@ -60,8 +60,8 @@ public class FactionStatus implements SubCommandBase {
                     Static.SUCCESS + "Description: " + Static.EXAMPLE + fDesc + Static.EOL +
                     Static.SUCCESS + "Public Base: " + Static.EXAMPLE + fBase + Static.EOL +
                     Static.SEPARATOR_COLOR + "---" + Static.EOL +
-                    Static.SUCCESS + "In war against: " + fWar + Static.EOL +
-                    Static.SUCCESS + "In alliance with: " + fAlliance + Static.EOL +
+                    Static.SUCCESS + "In war against: " + Static.EXAMPLE + fWar + Static.EOL +
+                    Static.SUCCESS + "In alliance with: " + Static.EXAMPLE + fAlliance + Static.EOL +
                     Static.SEPARATOR + Static.EOL);
         } else {
             commandSender.sendMessage(Static.ERROR + "You need to specify the faction's name to delete a faction!");
