@@ -55,7 +55,7 @@ public class FactionManager {
      * Check if it's the faction owner or not
      *
      * @param player player to check
-     * @param faction faction who's he's the owner
+     * @param faction faction who he's the owner
      * @param main ArchitectsLand main file
      * @return boolean
      */
@@ -64,11 +64,7 @@ public class FactionManager {
 
         final String owner = factions.getString(faction + ".owner");
 
-        if (Objects.equals(owner, String.valueOf(player.getUniqueId()))) {
-            return true;
-        } else {
-            return false;
-        }
+        return Objects.equals(owner, String.valueOf(player.getUniqueId()));
     }
 
     /**
@@ -83,10 +79,12 @@ public class FactionManager {
 
         final String faction = list.getString(player.getUniqueId() + ".faction");
 
-        if (faction != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return faction != null;
+    }
+
+    public static String getFactionOfThePlayer(Player player, ArchitectsLand main) {
+        final YamlConfiguration list = YamlConfiguration.loadConfiguration(FileManager.getPlayersData(main));
+
+        return list.getString(player.getUniqueId() + ".faction");
     }
 }
