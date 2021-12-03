@@ -1,11 +1,9 @@
 package main.java.codes.anhgelus.architectsLand;
 
-import main.java.codes.anhgelus.architectsLand.command.AnnouncementCommand;
-import main.java.codes.anhgelus.architectsLand.command.BroadcastCommand;
-import main.java.codes.anhgelus.architectsLand.command.FactionCommand;
-import main.java.codes.anhgelus.architectsLand.command.HomeCommand;
+import main.java.codes.anhgelus.architectsLand.command.*;
 import main.java.codes.anhgelus.architectsLand.event.PlayerJoinSetList;
 import main.java.codes.anhgelus.architectsLand.tabCompleter.AnnouncementCompleter;
+import main.java.codes.anhgelus.architectsLand.tabCompleter.BaseCompleter;
 import main.java.codes.anhgelus.architectsLand.tabCompleter.BroadcastCompleter;
 import main.java.codes.anhgelus.architectsLand.tabCompleter.FactionCompleter;
 import org.bukkit.Bukkit;
@@ -41,11 +39,13 @@ public class ArchitectsLand extends JavaPlugin {
         getCommand("announcement").setExecutor(new AnnouncementCommand());
         getCommand("home").setExecutor(new HomeCommand(this));
         getCommand("sethome").setExecutor(new HomeCommand(this));
+        getCommand("base").setExecutor(new BaseCommand(this));
 
         //tabCompleter
         getCommand("f").setTabCompleter(new FactionCompleter(this));
         getCommand("broadcast").setTabCompleter(new BroadcastCompleter());
         getCommand("announcement").setTabCompleter(new AnnouncementCompleter());
+        getCommand("base").setTabCompleter(new BaseCompleter(this));
 
     }
 

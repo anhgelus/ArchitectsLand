@@ -1,6 +1,6 @@
 main: main.java.codes.anhgelus.architectsLand.ArchitectsLand
 name: ArchitectsLand
-version: 0.7.2-beta.3
+version: 0.8.1-beta.8
 author: Anhgelus
 depend: [DiscordSRV]
 commands:
@@ -23,3 +23,8 @@ commands:
   sethome:
     description: Set the player's home
     usage: Command error
+  base:
+    description: Base base command (use /b or /base for more informations)
+    usage: Command error
+    aliases:
+      - b
