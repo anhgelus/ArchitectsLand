@@ -25,8 +25,8 @@ public class BaseManager {
     /**
      * Get the home
      *
-     * @param faction faction's name for the base
-     * @param type type of home (public or privat)e
+     * @param faction Faction's name for the base
+     * @param type Type of home (public or private)
      * @return Location of the home
      */
     public Location getBase(String faction, String type) {
@@ -46,7 +46,7 @@ public class BaseManager {
     /**
      * Set the home
      *
-     * @param faction faction's name for the base
+     * @param faction Faction's name for the base
      * @param type Type of base (use static string)
      * @param base Location of the base
      * @param file File of the config
@@ -73,6 +73,12 @@ public class BaseManager {
         }
     }
 
+    /**
+     * Get the list of public base
+     *
+     * @param main ArchitectsLand main file
+     * @return List of the public base
+     */
     public String[] getBaseList(ArchitectsLand main) {
         final File listFile = FileManager.getListData(main);
         final YamlConfiguration yml = YamlConfiguration.loadConfiguration(listFile);
@@ -88,6 +94,25 @@ public class BaseManager {
     }
 
     /**
+     * Get the coords of a base
+     *
+     * @param faction Faction's name for the base
+     * @param type Type of home (public or private)
+     */
+    public String getBaseCoordsInString(String faction, String type) {
+        final double x = config.getDouble(faction + ".base." + type + "." + "x");
+        final double y = config.getDouble(faction + ".base." + type + "." + "y");
+        final double z = config.getDouble(faction + ".base." + type + "." + "z");
+
+        final String world = config.getString(faction + ".base." + type + "." + "world");
+
+        if (coordsValid(x, y, z, world)) {
+            return Math.ceil(x) + " " + Math.ceil(y) + " " + Math.ceil(z) + " (" + world + ")";
+        }
+        return "No public base was set";
+    }
+
+    /**
      * Check if the coords is valid
      *
      * @param x double coords x
@@ -100,5 +125,9 @@ public class BaseManager {
      */
     private boolean coordsValid(double x, double y, double z, float yaw, float pitch, String world) {
         return x != 0 && y != 0 && z != 0 && yaw != 0 && pitch != yaw && !Objects.equals(world, "undefined");
+    }
+
+    private boolean coordsValid(double x, double y, double z, String world) {
+        return coordsValid(x, y, z, 0.5f, 0.1f, world);
     }
 }

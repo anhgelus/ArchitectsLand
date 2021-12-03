@@ -1,6 +1,6 @@
 main: main.java.codes.anhgelus.architectsLand.ArchitectsLand
 name: ArchitectsLand
-version: 0.8.0-beta.13
+version: 0.8.1-dev.7
 author: Anhgelus
 depend: [DiscordSRV]
 commands:
