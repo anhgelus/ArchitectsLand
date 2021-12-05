@@ -18,7 +18,7 @@ public class PermissionManager {
     public static boolean permissionChecker(String commandSended, CommandSender commandSender, String[] commands, String permission) {
         for (String command : commands) {
             if (Objects.equals(commandSended, command)) {
-                if (commandSender.hasPermission(permission) && commandSender.isOp()) {
+                if (commandSender.hasPermission(permission) || commandSender.isOp()) {
                     return true;
                 }
             }
