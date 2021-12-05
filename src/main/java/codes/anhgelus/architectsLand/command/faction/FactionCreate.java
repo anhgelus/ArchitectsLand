@@ -69,7 +69,11 @@ public class FactionCreate implements SubCommandBase {
             playerConfig.set(playerUUID + ".faction", key);
 
             //Set every args in list.yml
-            listConfig.set("factions", key + FactionCommand.UUID_SEPARATOR);
+            if (listConfig.getString("factions") != null) {
+                listConfig.set("factions", listConfig.getString("factions") + key + FactionCommand.UUID_SEPARATOR);
+            } else {
+                listConfig.set("factions", key + FactionCommand.UUID_SEPARATOR);
+            }
 
             FactionCommand.saveFile(config, basesFile); //save factions.yml
             FactionCommand.saveFile(playerConfig, playersFile); //save players.yml
