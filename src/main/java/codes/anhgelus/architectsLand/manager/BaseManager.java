@@ -40,6 +40,7 @@ public class BaseManager {
         if (coordsValid(x, y, z, yaw, pitch, world)) {
             return new Location(Bukkit.getWorld(world), x, y, z, yaw, pitch);
         }
+
         return null;
     }
 

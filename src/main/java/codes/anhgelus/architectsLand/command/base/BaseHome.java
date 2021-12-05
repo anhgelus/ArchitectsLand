@@ -32,7 +32,7 @@ public class BaseHome implements SubCommandBase {
         final YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
         final BaseManager baseManager = new BaseManager(config, player);
 
-        final Location base = baseManager.getBase(FactionManager.getFactionOfThePlayer(player, main), BaseManager.PUBLIC);
+        final Location base = baseManager.getBase(FactionManager.getFactionOfThePlayer(player, main), BaseManager.PRIVATE);
 
         if (base != null) {
             player.teleport(base);
