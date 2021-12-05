@@ -60,7 +60,7 @@ public class FactionJoin implements SubCommandBase {
                     FactionCommand.saveFile(config, basesFile);
 
                     AnnouncementCommand.announcement("faction",
-                            ((Player) commandSender).getDisplayName() + "joined " + strings[1] + "!",
+                            ((Player) commandSender).getDisplayName() + " joined " + strings[1] + "!",
                             Bukkit.getOnlinePlayers().toArray(new Player[0]));
                     ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
                     Bukkit.dispatchCommand(console, "team join " + strings[1] + " " +  sender.getDisplayName());
