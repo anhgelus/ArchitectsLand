@@ -31,11 +31,14 @@ public class FactionJoin implements SubCommandBase {
             final File basesFile = FileManager.getFactionsData(main);
             final YamlConfiguration config = YamlConfiguration.loadConfiguration(basesFile);
 
+            final File listFile = FileManager.getListData(main);
+            final YamlConfiguration list = YamlConfiguration.loadConfiguration(listFile);
+
             final Player sender = (Player) commandSender;
 
             // Check if the faction exist
             if (!FactionManager.doubleFaction(config, strings[1])) {
-                commandSender.sendMessage(Static.ERROR + "This faction doesn't exist!");
+                sender.sendMessage(Static.ERROR + "This faction doesn't exist!");
                 return true;
             }
 
@@ -47,24 +50,33 @@ public class FactionJoin implements SubCommandBase {
 
             // Check if the player is in the faction
             for (String i : players) {
-                if (Objects.equals(i, String.valueOf(((Player) commandSender).getUniqueId()))) {
-                    commandSender.sendMessage(Static.ERROR + "You're already in this faction.");
+                if (Objects.equals(i, String.valueOf(sender.getUniqueId()))) {
+                    sender.sendMessage(Static.ERROR + "You're already in this faction.");
                     return true;
                 }
             }
 
             for (String i : invitations) {
                 if (Objects.equals(String.valueOf(sender.getUniqueId()), i)) {
-                    config.set(strings[1] + ".members", playersString + ((Player) commandSender).getUniqueId() + FactionCommand.UUID_SEPARATOR);
+                    config.set(faction + ".members", playersString + sender.getUniqueId() + FactionCommand.UUID_SEPARATOR);
+                    /*
+                     * Set the new invitations'
+                     * config.set(faction + ".invitation", FactionManager.removePlayerFromInvitation(player));
+                     */
+
+                    list.set(sender.getUniqueId() + ".faction", faction);
 
                     FactionCommand.saveFile(config, basesFile);
+                    FactionCommand.saveFile(list, listFile);
 
                     AnnouncementCommand.announcement("faction",
                             ((Player) commandSender).getDisplayName() + " joined " + strings[1] + "!",
                             Bukkit.getOnlinePlayers().toArray(new Player[0]));
+
                     ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
                     Bukkit.dispatchCommand(console, "team join " + strings[1] + " " +  sender.getDisplayName());
                     commandSender.sendMessage(Static.SUCCESS + "You joined " + strings[1] + "!");
+
                     ArchitectsLand.LOGGER.info(((Player) commandSender).getDisplayName() + " joined " + strings[1]);
                     return true;
                 }
