@@ -40,33 +40,35 @@ public class PlayerJoinSetList implements Listener {
             p.sendMessage(Static.SEPARATOR_COLOR + "Hey " + Static.EXAMPLE + p.getDisplayName() + Static.SEPARATOR_COLOR + ", welcome in Architects Land!");
 
             /* Set the default home in players.yml */
-            listConfig.set(pName + HomeManager.HOME_LOCATION + "x", 0);
-            listConfig.set(pName + HomeManager.HOME_LOCATION + "y", 0);
-            listConfig.set(pName + HomeManager.HOME_LOCATION + "z", 0);
-            listConfig.set(pName + HomeManager.HOME_LOCATION + "yaw", 0);
-            listConfig.set(pName + HomeManager.HOME_LOCATION + "pitch", 0);
-            listConfig.set(pName + HomeManager.HOME_LOCATION + "world", "undefined");
+            setDefaultHome(pName, playersConfig, playersFile);
+
+            listConfig.set("players", pName);
 
             FactionCommand.saveFile(listConfig, listFile); //save lists.yml
-            FactionCommand.saveFile(playersConfig, playersFile); //save players.yml
 
         } else if (!playersString.contains(pName)) {
             p.sendMessage(Static.SEPARATOR_COLOR + "Hey " + p.getDisplayName() + ", welcome in Architects Land!");
 
-            /* Set the players' name in lists.yml */
+            /* Set the players' name in players.yml */
+            setDefaultHome(pName, playersConfig, playersFile);
+
             listConfig.set("players", playersString + pName + FactionCommand.UUID_SEPARATOR);
 
-            /* Set the default home in players.yml */
-            listConfig.set(pName + HomeManager.HOME_LOCATION + "x", 0);
-            listConfig.set(pName + HomeManager.HOME_LOCATION + "y", 0);
-            listConfig.set(pName + HomeManager.HOME_LOCATION + "z", 0);
-            listConfig.set(pName + HomeManager.HOME_LOCATION + "yaw", 0);
-            listConfig.set(pName + HomeManager.HOME_LOCATION + "pitch", 0);
-            listConfig.set(pName + HomeManager.HOME_LOCATION + "world", "undefined");
-
             FactionCommand.saveFile(listConfig, listFile); //save lists.yml
-            FactionCommand.saveFile(playersConfig, playersFile); //save players.yml
 
         }
+    }
+
+    private void setDefaultHome(String uuid, YamlConfiguration conf, File file) {
+
+        /* Set the default home in players.yml */
+        conf.set(uuid + HomeManager.HOME_LOCATION + "x", 0);
+        conf.set(uuid + HomeManager.HOME_LOCATION + "y", 0);
+        conf.set(uuid + HomeManager.HOME_LOCATION + "z", 0);
+        conf.set(uuid + HomeManager.HOME_LOCATION + "yaw", 0);
+        conf.set(uuid + HomeManager.HOME_LOCATION + "pitch", 0);
+        conf.set(uuid + HomeManager.HOME_LOCATION + "world", "undefined");
+
+        FactionCommand.saveFile(conf, file);
     }
 }
