@@ -31,8 +31,8 @@ public class FactionJoin implements SubCommandBase {
             final File basesFile = FileManager.getFactionsData(main);
             final YamlConfiguration config = YamlConfiguration.loadConfiguration(basesFile);
 
-            final File listFile = FileManager.getListData(main);
-            final YamlConfiguration list = YamlConfiguration.loadConfiguration(listFile);
+            final File playersFile = FileManager.getPlayersData(main);
+            final YamlConfiguration yml = YamlConfiguration.loadConfiguration(playersFile);
 
             final Player sender = (Player) commandSender;
 
@@ -64,10 +64,10 @@ public class FactionJoin implements SubCommandBase {
                      * config.set(faction + ".invitation", FactionManager.removePlayerFromInvitation(player));
                      */
 
-                    list.set(sender.getUniqueId() + ".faction", faction);
+                    yml.set(sender.getUniqueId() + ".faction", faction);
 
                     FactionCommand.saveFile(config, basesFile);
-                    FactionCommand.saveFile(list, listFile);
+                    FactionCommand.saveFile(yml, playersFile);
 
                     AnnouncementCommand.announcement("faction",
                             ((Player) commandSender).getDisplayName() + " joined " + strings[1] + "!",
