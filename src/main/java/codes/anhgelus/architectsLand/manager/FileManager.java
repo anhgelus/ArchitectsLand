@@ -28,4 +28,13 @@ public class FileManager {
     public static File getListData(ArchitectsLand main) {
         return new File(main.getDataFolder(), "data/lists.yml");
     }
+
+    /**
+     * Get the config (config.yml)
+     *
+     * @return Config file
+     */
+    public static File getConfig(ArchitectsLand main) {
+        return new File(main.getDataFolder(), "config.yml");
+    }
 }
