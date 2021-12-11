@@ -24,7 +24,8 @@ public class FactionHelp implements SubCommandBase {
                 Static.SUCCESS + "/f modify <faction> <prefix | name | color | description> <modification> - Modify a faction " + Static.EXAMPLE + "(you need" + FactionModify.PERMISSION + " permission to delete it)" + Static.EOL +
                 Static.SUCCESS + "/f war <faction> - Declare a war " + Static.EXAMPLE + "(you need" + FactionWar.PERMISSION + " permission to declare the war)" + Static.EOL +
                 Static.SUCCESS + "/f makepeace <faction> - Make peace " + Static.EXAMPLE + "(you need" + FactionMakePeace.PERMISSION + " permission to make peace)" + Static.EOL +
-                Static.SUCCESS + "/f alliance <faction> - Declare an alliance " + Static.EXAMPLE + "(you need" + FactionAlliance.PERMISSION + " permission to declare an alliance)" + Static.EOL +
+                Static.SUCCESS + "/f alliance <faction> - Request an alliance " + Static.EXAMPLE + "(you need" + FactionAlliance.PERMISSION + " permission to request an alliance)" + Static.EOL +
+                Static.SUCCESS + "/f acceptalliance <faction> - Accept an alliance " + Static.EXAMPLE + "(you need" + FactionAcceptAlliance.PERMISSION + " permission to accept an alliance)" + Static.EOL +
                 Static.SUCCESS + "/f breakalliance <faction> - Break an alliance " + Static.EXAMPLE + "(you need" + FactionBreakAlliance.PERMISSION + " permission to break it)" + Static.EOL +
                 Static.SUCCESS + "/f delete <faction> - Delete a faction " + Static.EXAMPLE + "(you need" + FactionDelete.PERMISSION + " permission to delete it)" + Static.EOL +
                 Static.SEPARATOR + Static.EOL);
