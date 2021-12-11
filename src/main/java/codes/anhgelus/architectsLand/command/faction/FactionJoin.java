@@ -59,10 +59,8 @@ public class FactionJoin implements SubCommandBase {
             for (String i : invitations) {
                 if (Objects.equals(String.valueOf(sender.getUniqueId()), i)) {
                     config.set(faction + ".members", playersString + sender.getUniqueId() + FactionCommand.UUID_SEPARATOR);
-                    /*
-                     * Set the new invitations'
-                     * config.set(faction + ".invitation", FactionManager.removePlayerFromInvitation(player));
-                     */
+
+                    config.set(faction + ".invitation", Static.removeStringInArray(config.getString(faction + ".invitation").split(FactionCommand.UUID_SEPARATOR), String.valueOf(sender.getUniqueId())));
 
                     yml.set(sender.getUniqueId() + ".faction", faction);
 

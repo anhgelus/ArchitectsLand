@@ -53,7 +53,11 @@ public class FactionCompleter implements TabCompleter {
             /* /f war && /f alliance */
             } else if (Objects.equals(strings[0], "war") && strings.length == 2) {
                 return faction_indication;
+            } else if (Objects.equals(strings[0], "alliance") && strings.length == 2) {
+                return faction_indication;
             } else if ((Objects.equals(strings[0], "ba") || Objects.equals(strings[0], "break") || Objects.equals(strings[0], "breakalliance")) && strings.length == 2) {
+                return faction_indication;
+            } else if ((Objects.equals(strings[0], "acceptalliance") || Objects.equals(strings[0], "accepta") || Objects.equals(strings[0], "accept") || Objects.equals(strings[0], "aa") || Objects.equals(strings[0], "aalliance")) && strings.length == 2) {
                 return faction_indication;
             /* /f modify */
             } else if (Objects.equals(strings[0], "modify") && strings.length == 2) {
